@@ -16,42 +16,92 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .bento-card:hover { transform: translateY(-5px); transition: all 0.3s ease; border-color: rgba(96, 165, 250, 0.5); }
+        .lang-toggle { display: inline-flex; padding: 0.25rem; border-radius: 9999px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .lang-toggle button { border: 0; background: transparent; color: #94a3b8; font-size: 0.75rem; font-weight: 700; padding: 0.45rem 0.85rem; border-radius: 9999px; transition: all 0.2s ease; }
+        .lang-toggle button.active { background: rgba(59, 130, 246, 0.18); color: #f8fafc; }
+        .orb-field { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -2; }
+        .orb { position: absolute; border-radius: 9999px; filter: blur(10px); opacity: 0.35; animation: float 14s ease-in-out infinite; }
+        .orb:nth-child(1) { width: 18rem; height: 18rem; top: 12%; left: 8%; background: radial-gradient(circle, rgba(59, 130, 246, 0.28), rgba(59, 130, 246, 0)); }
+        .orb:nth-child(2) { width: 24rem; height: 24rem; top: 48%; right: 6%; background: radial-gradient(circle, rgba(168, 85, 247, 0.22), rgba(168, 85, 247, 0)); animation-delay: -4s; }
+        .orb:nth-child(3) { width: 16rem; height: 16rem; bottom: 8%; left: 30%; background: radial-gradient(circle, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0)); animation-delay: -9s; }
+        .status-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 0.9rem; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.7); color: #cbd5e1; font-size: 0.8rem; }
+        .status-dot { width: 0.55rem; height: 0.55rem; border-radius: 9999px; background: #22c55e; box-shadow: 0 0 0 rgba(34, 197, 94, 0.55); animation: pulse 1.8s infinite; }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out; will-change: transform; }
+        .tilt-card img { transition: transform 0.18s ease-out; will-change: transform; }
+        .tilt-card:hover img { transform: scale(1.035); }
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, #60a5fa, #a855f7); z-index: 60; box-shadow: 0 0 16px rgba(96, 165, 250, 0.45); }
+        @keyframes float {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(0, -18px, 0) scale(1.06); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
     </style>
 </head>
 <body class="selection:bg-blue-500/30">
 
+    <div class="scroll-progress" data-scroll-progress></div>
+    <div class="orb-field">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
     <div class="hero-glow"></div>
 
     <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <span class="text-xl font-bold tracking-tighter hover:scale-105 transition-transform cursor-pointer">ZW.</span>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
-                <a href="#about" class="hover:text-blue-400 transition">About</a>
-                <a href="#experience" class="hover:text-blue-400 transition">Experience</a>
-                <a href="#projects" class="hover:text-blue-400 transition">Projects</a>
-                <a href="#contact" class="hover:text-blue-400 transition font-semibold text-white">Contact</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-blue-400 transition" data-i18n="nav.about">About</a>
+                <a href="#experience" class="hover:text-blue-400 transition" data-i18n="nav.experience">Experience</a>
+                <a href="#projects" class="hover:text-blue-400 transition" data-i18n="nav.projects">Projects</a>
+                <a href="#contact" class="hover:text-blue-400 transition font-semibold text-white" data-i18n="nav.contact">Contact</a>
+                <div class="lang-toggle" aria-label="Language switcher">
+                    <button type="button" data-lang-switch="zh">中</button>
+                    <button type="button" data-lang-switch="en">EN</button>
+                </div>
             </div>
-            <button class="md:hidden"><i data-lucide="menu"></i></button>
+            <div class="md:hidden flex items-center gap-3">
+                <div class="lang-toggle" aria-label="Language switcher">
+                    <button type="button" data-lang-switch="zh">中</button>
+                    <button type="button" data-lang-switch="en">EN</button>
+                </div>
+                <button><i data-lucide="menu"></i></button>
+            </div>
         </div>
     </nav>
 
     <section class="relative pt-40 pb-20 px-6 max-w-6xl mx-auto">
         <div class="reveal active">
-            <div class="inline-block px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-medium mb-6">
+            <div class="inline-block px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-medium mb-6" data-i18n="hero.badge">
                 Open for Summer 2026 Internships
             </div>
             <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-6">
                 Ziyang <span class="text-gradient">Wang</span>
             </h1>
-            <p class="text-xl md:text-2xl text-slate-400 max-w-2xl leading-relaxed mb-10">
+            <p class="text-xl md:text-2xl text-slate-400 max-w-2xl leading-relaxed mb-10" data-i18n="hero.description">
                 CS Graduate Student at <span class="text-white font-semibold">Boston University</span>. 
                 Focusing on <span class="italic">NLP, LLMs, and Multi-Agent Systems</span>.
             </p>
+            <div class="flex flex-wrap gap-3 mb-10">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span data-i18n="hero.status">Currently exploring agentic AI systems</span>
+                </div>
+                <div class="status-pill">
+                    <i data-lucide="clock-3" class="w-4 h-4 text-blue-400"></i>
+                    <span data-live-clock>Boston time loading...</span>
+                </div>
+            </div>
             <div class="flex flex-wrap gap-4">
                 <a href="#projects" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-semibold transition flex items-center gap-2">
-                    View My Work <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <span data-i18n="hero.viewWork">View My Work</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
-                <a href="mailto:ziyangw321@gmail.com" class="px-8 py-3 glass hover:bg-white/5 rounded-full font-semibold transition">
+                <a href="mailto:ziyangw321@gmail.com" class="px-8 py-3 glass hover:bg-white/5 rounded-full font-semibold transition" data-i18n="hero.contact">
                     Contact Me
                 </a>
             </div>
@@ -60,7 +110,7 @@
 
     <section id="about" class="py-20 px-6 max-w-6xl mx-auto reveal">
         <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="relative group">
+            <div class="relative group tilt-card" data-tilt-card>
                 <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                 <div class="relative aspect-square bg-slate-900 rounded-2xl flex items-center justify-center border border-white/10 overflow-hidden">
                     <img
@@ -72,20 +122,20 @@
             </div>
             <div>
                 <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                    <i data-lucide="terminal" class="text-blue-500"></i> About Me
+                    <i data-lucide="terminal" class="text-blue-500"></i> <span data-i18n="about.title">About Me</span>
                 </h2>
-                <p class="text-slate-400 leading-relaxed mb-6">
+                <p class="text-slate-400 leading-relaxed mb-6" data-i18n="about.description">
                     I am a researcher and developer passionate about the intersection of <strong>Large Language Models</strong> and <strong>Visual Intelligence</strong>. [cite: 8] 
                     Currently, I'm exploring how multi-agent workflows can revolutionize software and hardware ecosystems. [cite: 27, 28]
                 </p>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="p-4 glass rounded-xl">
-                        <h4 class="text-white font-bold mb-1">Education</h4>
-                        <p class="text-xs text-slate-400">MS in CS @ Boston University </p>
+                        <h4 class="text-white font-bold mb-1" data-i18n="about.educationLabel">Education</h4>
+                        <p class="text-xs text-slate-400" data-i18n="about.educationValue">MS in CS @ Boston University </p>
                     </div>
                     <div class="p-4 glass rounded-xl">
-                        <h4 class="text-white font-bold mb-1">Interests</h4>
-                        <p class="text-xs text-slate-400">Diffusion Models, Agentic AI </p>
+                        <h4 class="text-white font-bold mb-1" data-i18n="about.interestsLabel">Interests</h4>
+                        <p class="text-xs text-slate-400" data-i18n="about.interestsValue">Diffusion Models, Agentic AI </p>
                     </div>
                 </div>
             </div>
@@ -93,34 +143,34 @@
     </section>
 
     <section id="skills" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-12 text-center">Tech Stack</h2>
+        <h2 class="text-3xl font-bold mb-12 text-center" data-i18n="skills.title">Tech Stack</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="p-6 glass rounded-2xl text-center bento-card">
                 <i data-lucide="code-2" class="mx-auto mb-4 text-blue-400"></i>
-                <h3 class="font-bold mb-2">Languages</h3>
-                <p class="text-xs text-slate-500">Python, Java, C, C++ </p>
+                <h3 class="font-bold mb-2" data-i18n="skills.languagesLabel">Languages</h3>
+                <p class="text-xs text-slate-500" data-i18n="skills.languagesValue">Python, Java, C, C++ </p>
             </div>
             <div class="p-6 glass rounded-2xl text-center bento-card">
                 <i data-lucide="brain-circuit" class="mx-auto mb-4 text-purple-400"></i>
-                <h3 class="font-bold mb-2">AI & Data</h3>
-                <p class="text-xs text-slate-500">PyTorch, NumPy, scikit-learn </p>
+                <h3 class="font-bold mb-2" data-i18n="skills.aiLabel">AI & Data</h3>
+                <p class="text-xs text-slate-500" data-i18n="skills.aiValue">PyTorch, NumPy, scikit-learn </p>
             </div>
             <div class="p-6 glass rounded-2xl text-center bento-card">
                 <i data-lucide="layout" class="mx-auto mb-4 text-emerald-400"></i>
-                <h3 class="font-bold mb-2">Academic</h3>
-                <p class="text-xs text-slate-500">Machine Learning, NLP </p>
+                <h3 class="font-bold mb-2" data-i18n="skills.academicLabel">Academic</h3>
+                <p class="text-xs text-slate-500" data-i18n="skills.academicValue">Machine Learning, NLP </p>
             </div>
             <div class="p-6 glass rounded-2xl text-center bento-card">
                 <i data-lucide="git-branch" class="mx-auto mb-4 text-orange-400"></i>
-                <h3 class="font-bold mb-2">Tools</h3>
-                <p class="text-xs text-slate-500">Git, Linux, Prompt Eng. </p>
+                <h3 class="font-bold mb-2" data-i18n="skills.toolsLabel">Tools</h3>
+                <p class="text-xs text-slate-500" data-i18n="skills.toolsValue">Git, Linux, Prompt Eng. </p>
             </div>
         </div>
     </section>
 
     <section id="experience" class="py-20 px-6 max-w-6xl mx-auto reveal">
         <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
-            <i data-lucide="briefcase" class="text-blue-500"></i> Professional Experience
+            <i data-lucide="briefcase" class="text-blue-500"></i> <span data-i18n="experience.title">Professional Experience</span>
         </h2>
         <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
             
@@ -132,11 +182,11 @@
                     <div class="flex items-center justify-between mb-2">
                         <time class="font-mono text-xs text-blue-500">Nov. 2025 - Feb. 2026 </time>
                     </div>
-                    <h3 class="font-bold text-white text-lg">AI Agent Research Intern</h3>
+                    <h3 class="font-bold text-white text-lg" data-i18n="experience.role1">AI Agent Research Intern</h3>
                     <p class="text-sm text-slate-400 mb-4">Deal Flow Xchange Inc. </p>
                     <ul class="text-sm text-slate-500 list-disc list-inside space-y-1">
-                        <li>Designed practical AI agent workflows for investor sourcing.</li>
-                        <li>Developed prompt strategies for founder-facing demo workflows.</li>
+                        <li data-i18n="experience.role1Item1">Designed practical AI agent workflows for investor sourcing.</li>
+                        <li data-i18n="experience.role1Item2">Developed prompt strategies for founder-facing demo workflows.</li>
                     </ul>
                 </div>
             </div>
@@ -149,11 +199,11 @@
                     <div class="flex items-center justify-between mb-2">
                         <time class="font-mono text-xs text-blue-500">Feb. 2025 - May. 2025 </time>
                     </div>
-                    <h3 class="font-bold text-white text-lg">AI Research Intern</h3>
+                    <h3 class="font-bold text-white text-lg" data-i18n="experience.role2">AI Research Intern</h3>
                     <p class="text-sm text-slate-400 mb-4">Xiaohongshu (RED) </p>
                     <ul class="text-sm text-slate-500 list-disc list-inside space-y-1">
-                        <li>Participated in large-model agent projects and research analysis.</li>
-                        <li>Conducted AI market research on software/hardware ecosystems.</li>
+                        <li data-i18n="experience.role2Item1">Participated in large-model agent projects and research analysis.</li>
+                        <li data-i18n="experience.role2Item2">Conducted AI market research on software/hardware ecosystems.</li>
                     </ul>
                 </div>
             </div>
@@ -162,21 +212,21 @@
     </section>
 
     <section id="projects" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-12">Publications & Research</h2>
+        <h2 class="text-3xl font-bold mb-12" data-i18n="projects.title">Publications & Research</h2>
         <div class="grid md:grid-cols-2 gap-8">
             <div class="glass p-8 rounded-3xl bento-card group">
                 <div class="flex justify-between items-start mb-6">
                     <div class="p-3 bg-blue-500/10 rounded-2xl text-blue-400">
                         <i data-lucide="image" class="w-8 h-8"></i>
                     </div>
-                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/20">Accepted</span>
+                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/20" data-i18n="projects.statusAccepted">Accepted</span>
                 </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition">Text-to-Image Generation Accuracy </h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition" data-i18n="projects.project1Title">Text-to-Image Generation Accuracy </h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="projects.project1Description">
                     Integrating CLIP and Diffusion Models for improved visual accuracy and semantic consistency. Accepted by NCAW 2024. 
                 </p>
                 <div class="flex gap-2">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Diffusion Models</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project1Tag1">Diffusion Models</span>
                     <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">CLIP</span>
                 </div>
             </div>
@@ -186,27 +236,27 @@
                     <div class="p-3 bg-purple-500/10 rounded-2xl text-purple-400">
                         <i data-lucide="cpu" class="w-8 h-8"></i>
                     </div>
-                    <span class="px-3 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-bold uppercase tracking-wider rounded-full border border-blue-500/20">Under Review</span>
+                    <span class="px-3 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-bold uppercase tracking-wider rounded-full border border-blue-500/20" data-i18n="projects.statusReview">Under Review</span>
                 </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition">Ensemble Evolutionary Algorithms </h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition" data-i18n="projects.project2Title">Ensemble Evolutionary Algorithms </h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="projects.project2Description">
                     Combining Crisscross Search and Sparrow Search for enhanced optimization. Submitted to IJCNN. 
                 </p>
                 <div class="flex gap-2">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Evolutionary Algorithms</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Optimization</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project2Tag1">Evolutionary Algorithms</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project2Tag2">Optimization</span>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="py-20 px-6 max-w-4xl mx-auto text-center reveal">
-        <h2 class="text-4xl font-extrabold mb-8">Let's Connect</h2>
-        <p class="text-slate-400 mb-12">I am always open to discussing AI research, internship opportunities, or interesting projects.</p>
+        <h2 class="text-4xl font-extrabold mb-8" data-i18n="contact.title">Let's Connect</h2>
+        <p class="text-slate-400 mb-12" data-i18n="contact.description">I am always open to discussing AI research, internship opportunities, or interesting projects.</p>
         <div class="flex flex-wrap justify-center gap-6">
             <a href="mailto:ziyangw321@gmail.com" class="p-4 glass rounded-2xl hover:bg-white/5 transition group">
                 <i data-lucide="mail" class="w-6 h-6 mx-auto mb-2 text-blue-500 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-medium">Email</span>
+                <span class="text-xs font-medium" data-i18n="contact.email">Email</span>
             </a>
             <a href="https://github.com/calloftheNIGHT2023" target="_blank" class="p-4 glass rounded-2xl hover:bg-white/5 transition group">
                 <i data-lucide="github" class="w-6 h-6 mx-auto mb-2 text-slate-100 group-hover:scale-110 transition"></i>
@@ -220,11 +270,179 @@
     </section>
 
     <footer class="py-10 border-t border-white/5 text-center text-slate-500 text-sm">
-        <p>&copy; 2026 Ziyang Wang. Powered by curiosity and AI.</p>
-        <p class="mt-2 italic">"The best way to predict the future is to generate it."</p>
+        <p data-i18n="footer.copy">&copy; 2026 Ziyang Wang. Powered by curiosity and AI.</p>
+        <p class="mt-2 italic" data-i18n="footer.quote">"The best way to predict the future is to generate it."</p>
     </footer>
 
     <script>
+        const translations = {
+            zh: {
+                pageTitle: "Ziyang (Williams) Wang | AI研究者与开发者",
+                metaDescription: "Ziyang Wang - 波士顿大学计算机硕士，专注于 NLP、LLM 和多智能体系统。",
+                "nav.about": "关于我",
+                "nav.experience": "经历",
+                "nav.projects": "项目",
+                "nav.contact": "联系",
+                "hero.badge": "开放申请 2026 年夏季实习",
+                "hero.description": "波士顿大学计算机科学硕士在读，研究方向聚焦于 <span class=\"text-white font-semibold\">NLP、LLM 与多智能体系统</span>。",
+                "hero.status": "正在探索 Agentic AI 系统",
+                "hero.viewWork": "查看作品",
+                "hero.contact": "联系我",
+                "about.title": "关于我",
+                "about.description": "我是一名关注<strong>大语言模型</strong>与<strong>视觉智能</strong>交叉方向的研究者和开发者。当前我正在探索多智能体工作流如何重塑软件与硬件生态。",
+                "about.educationLabel": "教育背景",
+                "about.educationValue": "波士顿大学计算机科学硕士",
+                "about.interestsLabel": "研究兴趣",
+                "about.interestsValue": "扩散模型、Agentic AI",
+                "skills.title": "技术栈",
+                "skills.languagesLabel": "编程语言",
+                "skills.languagesValue": "Python、Java、C、C++",
+                "skills.aiLabel": "AI 与数据",
+                "skills.aiValue": "PyTorch、NumPy、scikit-learn",
+                "skills.academicLabel": "学术方向",
+                "skills.academicValue": "机器学习、自然语言处理",
+                "skills.toolsLabel": "工具",
+                "skills.toolsValue": "Git、Linux、Prompt Engineering",
+                "experience.title": "专业经历",
+                "experience.role1": "AI Agent 研究实习生",
+                "experience.role1Item1": "为投资人挖掘场景设计实用的 AI Agent 工作流。",
+                "experience.role1Item2": "为面向创始人的演示流程设计提示词策略。",
+                "experience.role2": "AI 研究实习生",
+                "experience.role2Item1": "参与大模型 Agent 项目与研究分析工作。",
+                "experience.role2Item2": "围绕软硬件生态开展 AI 市场研究。",
+                "projects.title": "论文与研究",
+                "projects.statusAccepted": "已录用",
+                "projects.project1Title": "文生图生成准确性研究",
+                "projects.project1Description": "结合 CLIP 与扩散模型，提升生成图像的视觉准确性与语义一致性。已被 NCAW 2024 接收。",
+                "projects.project1Tag1": "扩散模型",
+                "projects.statusReview": "审稿中",
+                "projects.project2Title": "集成进化算法研究",
+                "projects.project2Description": "结合 Crisscross Search 与 Sparrow Search 以提升优化效果，已投稿至 IJCNN。",
+                "projects.project2Tag1": "进化算法",
+                "projects.project2Tag2": "优化",
+                "contact.title": "联系我",
+                "contact.description": "欢迎交流 AI 研究、实习机会或任何有意思的项目。",
+                "contact.email": "邮箱",
+                "footer.copy": "&copy; 2026 Ziyang Wang. 由好奇心与 AI 驱动。",
+                "footer.quote": "“预测未来的最好方式，就是亲手创造它。”"
+            },
+            en: {
+                pageTitle: "Ziyang (Williams) Wang | AI Researcher & Developer",
+                metaDescription: "Ziyang Wang - CS Graduate Student at Boston University, specializing in NLP, LLMs, and Multi-Agent Systems.",
+                "nav.about": "About",
+                "nav.experience": "Experience",
+                "nav.projects": "Projects",
+                "nav.contact": "Contact",
+                "hero.badge": "Open for Summer 2026 Internships",
+                "hero.description": "CS Graduate Student at <span class=\"text-white font-semibold\">Boston University</span>. Focusing on <span class=\"italic\">NLP, LLMs, and Multi-Agent Systems</span>.",
+                "hero.status": "Currently exploring agentic AI systems",
+                "hero.viewWork": "View My Work",
+                "hero.contact": "Contact Me",
+                "about.title": "About Me",
+                "about.description": "I am a researcher and developer passionate about the intersection of <strong>Large Language Models</strong> and <strong>Visual Intelligence</strong>. Currently, I'm exploring how multi-agent workflows can reshape software and hardware ecosystems.",
+                "about.educationLabel": "Education",
+                "about.educationValue": "MS in CS @ Boston University",
+                "about.interestsLabel": "Interests",
+                "about.interestsValue": "Diffusion Models, Agentic AI",
+                "skills.title": "Tech Stack",
+                "skills.languagesLabel": "Languages",
+                "skills.languagesValue": "Python, Java, C, C++",
+                "skills.aiLabel": "AI & Data",
+                "skills.aiValue": "PyTorch, NumPy, scikit-learn",
+                "skills.academicLabel": "Academic",
+                "skills.academicValue": "Machine Learning, NLP",
+                "skills.toolsLabel": "Tools",
+                "skills.toolsValue": "Git, Linux, Prompt Eng.",
+                "experience.title": "Professional Experience",
+                "experience.role1": "AI Agent Research Intern",
+                "experience.role1Item1": "Designed practical AI agent workflows for investor sourcing.",
+                "experience.role1Item2": "Developed prompt strategies for founder-facing demo workflows.",
+                "experience.role2": "AI Research Intern",
+                "experience.role2Item1": "Participated in large-model agent projects and research analysis.",
+                "experience.role2Item2": "Conducted AI market research on software and hardware ecosystems.",
+                "projects.title": "Publications & Research",
+                "projects.statusAccepted": "Accepted",
+                "projects.project1Title": "Text-to-Image Generation Accuracy",
+                "projects.project1Description": "Integrating CLIP and Diffusion Models for improved visual accuracy and semantic consistency. Accepted by NCAW 2024.",
+                "projects.project1Tag1": "Diffusion Models",
+                "projects.statusReview": "Under Review",
+                "projects.project2Title": "Ensemble Evolutionary Algorithms",
+                "projects.project2Description": "Combining Crisscross Search and Sparrow Search for enhanced optimization. Submitted to IJCNN.",
+                "projects.project2Tag1": "Evolutionary Algorithms",
+                "projects.project2Tag2": "Optimization",
+                "contact.title": "Let's Connect",
+                "contact.description": "I am always open to discussing AI research, internship opportunities, or interesting projects.",
+                "contact.email": "Email",
+                "footer.copy": "&copy; 2026 Ziyang Wang. Powered by curiosity and AI.",
+                "footer.quote": "\"The best way to predict the future is to generate it.\""
+            }
+        };
+
+        function applyLanguage(lang) {
+            const selected = translations[lang] ? lang : "zh";
+            const dictionary = translations[selected];
+
+            document.documentElement.lang = selected === "zh" ? "zh-CN" : "en";
+            document.title = dictionary.pageTitle;
+
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                metaDescription.setAttribute("content", dictionary.metaDescription);
+            }
+
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                const key = element.dataset.i18n;
+                if (dictionary[key]) {
+                    element.innerHTML = dictionary[key];
+                }
+            });
+
+            document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+                button.classList.toggle("active", button.dataset.langSwitch === selected);
+            });
+
+            localStorage.setItem("preferredLanguage", selected);
+        }
+
+        function updateLiveClock() {
+            const clock = document.querySelector("[data-live-clock]");
+            if (!clock) return;
+            const isChinese = document.documentElement.lang.startsWith("zh");
+            const formatter = new Intl.DateTimeFormat(isChinese ? "zh-CN" : "en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false,
+                timeZone: "America/New_York"
+            });
+            clock.textContent = `${isChinese ? "波士顿时间" : "Boston time"} ${formatter.format(new Date())}`;
+        }
+
+        function initTiltCards() {
+            document.querySelectorAll("[data-tilt-card]").forEach((card) => {
+                card.addEventListener("mousemove", (event) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (event.clientX - rect.left) / rect.width;
+                    const y = (event.clientY - rect.top) / rect.height;
+                    const rotateY = (x - 0.5) * 10;
+                    const rotateX = (0.5 - y) * 10;
+                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
+                });
+            });
+        }
+
+        function updateScrollProgress() {
+            const progressBar = document.querySelector("[data-scroll-progress]");
+            if (!progressBar) return;
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+            progressBar.style.width = `${progress}%`;
+        }
+
         // Initialize Icons
         lucide.createIcons();
 
@@ -239,6 +457,20 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        document.querySelectorAll("[data-lang-switch]").forEach((button) => {
+            button.addEventListener("click", () => {
+                applyLanguage(button.dataset.langSwitch);
+                updateLiveClock();
+            });
+        });
+
+        applyLanguage(localStorage.getItem("preferredLanguage") || "zh");
+        updateLiveClock();
+        initTiltCards();
+        updateScrollProgress();
+        setInterval(updateLiveClock, 1000);
+        window.addEventListener("scroll", updateScrollProgress, { passive: true });
     </script>
 </body>
 </html>
