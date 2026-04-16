@@ -75,13 +75,13 @@
                 <a href="#projects" class="hover:text-blue-400 transition" data-i18n="nav.projects">Projects</a>
                 <a href="#contact" class="hover:text-blue-400 transition font-semibold text-white" data-i18n="nav.contact">Contact</a>
                 <div class="lang-toggle" aria-label="Language switcher">
-                    <button type="button" data-lang-switch="zh">中</button>
+                    <button type="button" data-lang-switch="zh">中文</button>
                     <button type="button" data-lang-switch="en">EN</button>
                 </div>
             </div>
             <div class="md:hidden flex items-center gap-3">
                 <div class="lang-toggle" aria-label="Language switcher">
-                    <button type="button" data-lang-switch="zh">中</button>
+                    <button type="button" data-lang-switch="zh">中文</button>
                     <button type="button" data-lang-switch="en">EN</button>
                 </div>
                 <button><i data-lucide="menu"></i></button>
@@ -241,41 +241,93 @@
     </section>
 
     <section id="projects" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-12" data-i18n="projects.title">Publications & Research</h2>
+        <div class="flex flex-col gap-3 mb-12 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-3" data-i18n="projects.eyebrow">Recent Build Log</p>
+                <h2 class="text-3xl font-bold" data-i18n="projects.title">Selected Work</h2>
+            </div>
+            <p class="text-sm text-slate-400 max-w-2xl" data-i18n="projects.subtitle">
+                A mix of recent product builds and research work across agents, developer tools, and applied AI systems.
+            </p>
+        </div>
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass p-8 rounded-3xl bento-card group">
-                <div class="flex justify-between items-start mb-6">
+            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
+                <div class="flex justify-between items-start mb-6 gap-4">
+                    <div class="p-3 bg-emerald-500/10 rounded-2xl text-emerald-400">
+                        <i data-lucide="gamepad-2" class="w-8 h-8"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/20" data-i18n="projects.statusRecent">Recent Build</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3 group-hover:text-emerald-400 transition" data-i18n="projects.project3Title">GameBuddy Agent</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project3Description">
+                    A browser-based game analysis lab that turns game states into structured review, tactical direction, and beginner-friendly explanations, while also shipping playable sandbox modules in the same project.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project3Tag1">Game Analysis</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project3Tag2">OpenRouter</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project3Tag3">Playable Sandbox</span>
+                </div>
+                <a href="https://github.com/calloftheNIGHT2023/gamebuddy-agent" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition">
+                    <span data-i18n="projects.viewRepo">View Repo</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </article>
+
+            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
+                <div class="flex justify-between items-start mb-6 gap-4">
+                    <div class="p-3 bg-amber-500/10 rounded-2xl text-amber-400">
+                        <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-amber-500/20" data-i18n="projects.statusLearning">Learning Build</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3 group-hover:text-amber-400 transition" data-i18n="projects.project4Title">Transformer by Scratch</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project4Description">
+                    A from-scratch Transformer learning repo that documents how I moved from vague concepts to a runnable decoder-only model, with tutorials, attention demos, and tiny-language-model training scripts.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project4Tag1">PyTorch</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project4Tag2">Attention</span>
+                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project4Tag3">Decoder-only LM</span>
+                </div>
+                <a href="https://github.com/calloftheNIGHT2023/transformer-by-scratch" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition">
+                    <span data-i18n="projects.viewRepo">View Repo</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </article>
+
+            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
+                <div class="flex justify-between items-start mb-6 gap-4">
                     <div class="p-3 bg-blue-500/10 rounded-2xl text-blue-400">
                         <i data-lucide="image" class="w-8 h-8"></i>
                     </div>
                     <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/20" data-i18n="projects.statusAccepted">Accepted</span>
                 </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition" data-i18n="projects.project1Title">Text-to-Image Generation Accuracy </h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="projects.project1Description">
-                    Integrating CLIP and Diffusion Models for improved visual accuracy and semantic consistency. Accepted by NCAW 2024. 
+                <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition" data-i18n="projects.project1Title">Text-to-Image Generation Accuracy</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project1Description">
+                    Integrating CLIP and Diffusion Models for improved visual accuracy and semantic consistency. Accepted by NCAW 2024.
                 </p>
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                     <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project1Tag1">Diffusion Models</span>
                     <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">CLIP</span>
                 </div>
-            </div>
+            </article>
 
-            <div class="glass p-8 rounded-3xl bento-card group">
-                <div class="flex justify-between items-start mb-6">
+            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
+                <div class="flex justify-between items-start mb-6 gap-4">
                     <div class="p-3 bg-purple-500/10 rounded-2xl text-purple-400">
                         <i data-lucide="cpu" class="w-8 h-8"></i>
                     </div>
                     <span class="px-3 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-bold uppercase tracking-wider rounded-full border border-blue-500/20" data-i18n="projects.statusReview">Under Review</span>
                 </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition" data-i18n="projects.project2Title">Ensemble Evolutionary Algorithms </h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="projects.project2Description">
-                    Combining Crisscross Search and Sparrow Search for enhanced optimization. Submitted to IJCNN. 
+                <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition" data-i18n="projects.project2Title">Ensemble Evolutionary Algorithms</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project2Description">
+                    Combining Crisscross Search and Sparrow Search for enhanced optimization. Submitted to IJCNN.
                 </p>
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                     <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project2Tag1">Evolutionary Algorithms</span>
                     <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project2Tag2">Optimization</span>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
 
@@ -345,7 +397,11 @@
                 "experience.role2": "AI 研究实习生",
                 "experience.role2Item1": "参与大模型 Agent 项目与研究分析工作。",
                 "experience.role2Item2": "围绕软硬件生态开展 AI 市场研究。",
-                "projects.title": "论文与研究",
+                "projects.eyebrow": "最近在做",
+                "projects.title": "精选项目与研究",
+                "projects.subtitle": "这里放的是最近做的产品型项目，以及一部分持续推进的研究工作，重点集中在 agent、开发工具和应用型 AI 系统。",
+                "projects.statusRecent": "近期项目",
+                "projects.statusLearning": "学习项目",
                 "projects.statusAccepted": "已录用",
                 "projects.project1Title": "文生图生成准确性研究",
                 "projects.project1Description": "结合 CLIP 与扩散模型，提升生成图像的视觉准确性与语义一致性。已被 NCAW 2024 接收。",
@@ -355,6 +411,17 @@
                 "projects.project2Description": "结合 Crisscross Search 与 Sparrow Search 以提升优化效果，已投稿至 IJCNN。",
                 "projects.project2Tag1": "进化算法",
                 "projects.project2Tag2": "优化",
+                "projects.project3Title": "GameBuddy Agent",
+                "projects.project3Description": "一个浏览器端游戏分析实验室，把游戏状态转成结构化复盘、策略方向和面向新手的解释，同时在同一项目里保留可直接游玩的 sandbox 模块。",
+                "projects.project3Tag1": "Game Analysis",
+                "projects.project3Tag2": "OpenRouter",
+                "projects.project3Tag3": "Playable Sandbox",
+                "projects.project4Title": "Transformer by Scratch",
+                "projects.project4Description": "一个从零学习 Transformer 的练手仓库，记录我如何把模糊概念拆成可运行的 decoder-only 模型，包括教程、attention 演示和最小语言模型训练脚本。",
+                "projects.project4Tag1": "PyTorch",
+                "projects.project4Tag2": "Attention",
+                "projects.project4Tag3": "Decoder-only LM",
+                "projects.viewRepo": "查看仓库",
                 "contact.title": "联系我",
                 "contact.description": "欢迎交流 AI 研究、实习机会或任何有意思的项目。",
                 "contact.email": "邮箱",
@@ -401,7 +468,11 @@
                 "experience.role2": "AI Research Intern",
                 "experience.role2Item1": "Participated in large-model agent projects and research analysis.",
                 "experience.role2Item2": "Conducted AI market research on software and hardware ecosystems.",
-                "projects.title": "Publications & Research",
+                "projects.eyebrow": "Recent Build Log",
+                "projects.title": "Selected Work",
+                "projects.subtitle": "A mix of recent product builds and research work across agents, developer tools, and applied AI systems.",
+                "projects.statusRecent": "Recent Build",
+                "projects.statusLearning": "Learning Build",
                 "projects.statusAccepted": "Accepted",
                 "projects.project1Title": "Text-to-Image Generation Accuracy",
                 "projects.project1Description": "Integrating CLIP and Diffusion Models for improved visual accuracy and semantic consistency. Accepted by NCAW 2024.",
@@ -411,6 +482,17 @@
                 "projects.project2Description": "Combining Crisscross Search and Sparrow Search for enhanced optimization. Submitted to IJCNN.",
                 "projects.project2Tag1": "Evolutionary Algorithms",
                 "projects.project2Tag2": "Optimization",
+                "projects.project3Title": "GameBuddy Agent",
+                "projects.project3Description": "A browser-based game analysis lab that turns game states into structured review, tactical direction, and beginner-friendly explanations, while also shipping playable sandbox modules in the same project.",
+                "projects.project3Tag1": "Game Analysis",
+                "projects.project3Tag2": "OpenRouter",
+                "projects.project3Tag3": "Playable Sandbox",
+                "projects.project4Title": "Transformer by Scratch",
+                "projects.project4Description": "A from-scratch Transformer learning repo that documents how I moved from vague concepts to a runnable decoder-only model, with tutorials, attention demos, and tiny-language-model training scripts.",
+                "projects.project4Tag1": "PyTorch",
+                "projects.project4Tag2": "Attention",
+                "projects.project4Tag3": "Decoder-only LM",
+                "projects.viewRepo": "View Repo",
                 "contact.title": "Let's Connect",
                 "contact.description": "I am always open to discussing AI research, internship opportunities, or interesting projects.",
                 "contact.email": "Email",
