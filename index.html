@@ -31,7 +31,7 @@
         .tilt-card:hover img { transform: scale(1.035); }
         .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, #60a5fa, #a855f7); z-index: 60; box-shadow: 0 0 16px rgba(96, 165, 250, 0.45); }
         .cursor-glow { position: fixed; width: 20rem; height: 20rem; border-radius: 9999px; pointer-events: none; z-index: -1; background: radial-gradient(circle, rgba(96, 165, 250, 0.14), rgba(96, 165, 250, 0)); transform: translate(-50%, -50%); filter: blur(16px); transition: opacity 0.25s ease; }
-        .hero-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .hero-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
         .metric-card { position: relative; overflow: hidden; padding: 1rem 1.1rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(10px); transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease; }
         .metric-card:hover { transform: translateY(-4px); border-color: rgba(96, 165, 250, 0.4); background: rgba(15, 23, 42, 0.72); }
         .metric-card strong { display: block; color: #f8fafc; font-size: 1.05rem; font-weight: 700; }
@@ -132,6 +132,10 @@
                 <div class="metric-card magnetic" data-magnetic>
                     <strong data-i18n="hero.metric3Title">Agents + Evaluation</strong>
                     <span data-i18n="hero.metric3Body">Building reproducible multi-agent systems, validators, and dynamic evaluation loops.</span>
+                </div>
+                <div class="metric-card magnetic" data-magnetic>
+                    <strong data-i18n="hero.metric4Title">6.82B</strong>
+                    <span data-i18n="hero.metric4Body">Lifetime Tokens</span>
                 </div>
             </div>
         </div>
@@ -419,6 +423,8 @@
                 "hero.metric2Body": "对比从头预训练中的密集、学习式稀疏与局部注意力。",
                 "hero.metric3Title": "智能体与评测",
                 "hero.metric3Body": "构建可复现的多智能体系统、验证器与动态评测闭环。",
+                "hero.metric4Title": "68.2 亿",
+                "hero.metric4Body": "累计 Token 数",
                 "about.title": "关于我",
                 "about.description": "我是波士顿大学计算机科学硕士研究生，研究方向聚焦于<strong>大语言模型</strong>、<strong>测试时学习</strong>、原生稀疏注意力与多智能体系统。具备从任务建模、数据构造、训练到可复现实验评测的完整经验。",
                 "about.educationLabel": "教育背景",
@@ -491,6 +497,8 @@
                 "hero.metric2Body": "Comparing dense, learned-sparse, and local attention in from-scratch pretraining.",
                 "hero.metric3Title": "Agents + Evaluation",
                 "hero.metric3Body": "Building reproducible multi-agent systems, validators, and dynamic evaluation loops.",
+                "hero.metric4Title": "6.82B",
+                "hero.metric4Body": "Lifetime Tokens",
                 "about.title": "About Me",
                 "about.description": "I am a Boston University CS master's student working on <strong>large language models</strong>, <strong>test-time learning</strong>, native sparse attention, and multi-agent systems. My work spans task design, data construction, training, and reproducible evaluation.",
                 "about.educationLabel": "Education",
