@@ -1,879 +1,148 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ziyang (Williams) Wang | AI Researcher & Developer</title>
-    <meta name="description" content="Ziyang (Williams) Wang, Boston University CS master's student. Research and projects in test-time learning, efficient language models, agent systems, and structured memory.">
-    <link rel="canonical" href="https://www.ziyangwang.xyz/">
-    <meta name="theme-color" content="#020617">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Ziyang (Williams) Wang | AI Research & Engineering">
-    <meta property="og:description" content="Education, industry experience, publications, and selected work in language models, agents, and structured memory.">
-    <meta property="og:url" content="https://www.ziyangwang.xyz/">
-    <meta property="og:image" content="https://www.ziyangwang.xyz/6207571c901eb8592de488e44c275c12.jpg">
-    <meta name="twitter:card" content="summary">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
-        .glass { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .text-gradient { background: linear-gradient(to right, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-glow { position: absolute; top: -10%; left: -10%; width: 40%; height: 40%; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(2, 6, 23, 0) 70%); z-index: -1; }
-        .reveal { opacity: 1; transform: none; }
-        section[id] { scroll-margin-top: 6rem; }
-        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #93c5fd; outline-offset: 5px; }
-        .mobile-nav { position: absolute; top: 4rem; left: 0; right: 0; padding: 1rem 1.5rem; background: #0f172a; border-bottom: 1px solid #334155; }
-        .mobile-nav a { display: block; padding: .7rem 0; color: #cbd5e1; }
-        .detail-list { color: #94a3b8; font-size: .875rem; line-height: 1.85; margin: 1rem 0 1.5rem; padding-left: 1.1rem; list-style: disc; }
-        .project-date { color: #94a3b8; font-size: .75rem; margin-bottom: .75rem; }
-        .paper-title { overflow-wrap: anywhere; }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-        }
-        @media (max-width: 767px) {
-            .status-pill { max-width: 100%; font-size: .75rem; }
-            .status-pill span { min-width: 0; }
-            h1 { font-size: clamp(3rem, 13vw, 6rem) !important; }
-        }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .bento-card:hover { transform: translateY(-5px); transition: all 0.3s ease; border-color: rgba(96, 165, 250, 0.5); }
-        .lang-toggle { display: inline-flex; padding: 0.25rem; border-radius: 9999px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .lang-toggle button { border: 0; background: transparent; color: #94a3b8; font-size: 0.75rem; font-weight: 700; padding: 0.45rem 0.85rem; border-radius: 9999px; transition: all 0.2s ease; }
-        .lang-toggle button.active { background: rgba(59, 130, 246, 0.18); color: #f8fafc; }
-        .orb-field { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -2; }
-        .orb { position: absolute; border-radius: 9999px; filter: blur(10px); opacity: 0.35; animation: float 14s ease-in-out infinite; }
-        .orb:nth-child(1) { width: 18rem; height: 18rem; top: 12%; left: 8%; background: radial-gradient(circle, rgba(59, 130, 246, 0.28), rgba(59, 130, 246, 0)); }
-        .orb:nth-child(2) { width: 24rem; height: 24rem; top: 48%; right: 6%; background: radial-gradient(circle, rgba(168, 85, 247, 0.22), rgba(168, 85, 247, 0)); animation-delay: -4s; }
-        .orb:nth-child(3) { width: 16rem; height: 16rem; bottom: 8%; left: 30%; background: radial-gradient(circle, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0)); animation-delay: -9s; }
-        .status-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 0.9rem; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.7); color: #cbd5e1; font-size: 0.8rem; }
-        .status-dot { width: 0.55rem; height: 0.55rem; border-radius: 9999px; background: #22c55e; box-shadow: 0 0 0 rgba(34, 197, 94, 0.55); animation: pulse 1.8s infinite; }
-        .tilt-card { transform-style: preserve-3d; transition: transform 0.18s ease-out; will-change: transform; }
-        .tilt-card img { transition: transform 0.18s ease-out; will-change: transform; }
-        .tilt-card:hover img { transform: scale(1.035); }
-        .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, #60a5fa, #a855f7); z-index: 60; box-shadow: 0 0 16px rgba(96, 165, 250, 0.45); }
-        .cursor-glow { position: fixed; width: 20rem; height: 20rem; border-radius: 9999px; pointer-events: none; z-index: -1; background: radial-gradient(circle, rgba(96, 165, 250, 0.14), rgba(96, 165, 250, 0)); transform: translate(-50%, -50%); filter: blur(16px); transition: opacity 0.25s ease; }
-        .hero-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
-        .metric-card { position: relative; overflow: hidden; padding: 1rem 1.1rem; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(10px); transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease; }
-        .metric-card:hover { transform: translateY(-4px); border-color: rgba(96, 165, 250, 0.4); background: rgba(15, 23, 42, 0.72); }
-        .metric-card strong { display: block; color: #f8fafc; font-size: 1.05rem; font-weight: 700; }
-        .metric-card span { display: block; margin-top: 0.3rem; color: #94a3b8; font-size: 0.78rem; line-height: 1.4; }
-        .icon-drift { transition: transform 0.18s ease-out, filter 0.18s ease-out; transform-origin: center; will-change: transform; }
-        .icon-drift.is-dragging { filter: drop-shadow(0 6px 18px rgba(96, 165, 250, 0.28)); }
-        .magnetic { transition: transform 0.18s ease-out, box-shadow 0.18s ease-out; will-change: transform; }
-        .magnetic:hover { box-shadow: 0 14px 30px rgba(15, 23, 42, 0.28); }
-        @media (max-width: 768px) {
-            .hero-metrics { grid-template-columns: 1fr; }
-            .cursor-glow { display: none; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(0, -18px, 0) scale(1.06); }
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
-            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-    </style>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Ziyang (Williams) Wang — Research & Engineering</title>
+ <meta name="description" content="Ziyang (Williams) Wang. Boston University CS graduate student working on language-model learning, efficient attention, and agent systems.">
+ <meta name="theme-color" content="#f3f0e9">
+ <link rel="canonical" href="https://www.ziyangwang.xyz/">
+ <link rel="icon" type="image/svg+xml" href="favicon.svg">
+ <meta property="og:type" content="website">
+ <meta property="og:title" content="Ziyang Wang — Research & Engineering">
+ <meta property="og:description" content="Selected research, systems, and a little context.">
+ <meta property="og:url" content="https://www.ziyangwang.xyz/">
+ <meta property="og:image" content="https://www.ziyangwang.xyz/6207571c901eb8592de488e44c275c12.jpg">
+ <meta name="twitter:card" content="summary">
+ <link rel="stylesheet" href="styles.css?v=editorial-1">
+ <script defer src="site.js?v=editorial-1"></script>
 </head>
-<body id="top" class="selection:bg-blue-500/30">
-
-    <div class="scroll-progress" data-scroll-progress></div>
-    <div class="cursor-glow" data-cursor-glow></div>
-    <div class="orb-field">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
+<body id="top">
+ <a class="skip-link" data-i18n="site.skip" href="#main">Skip to content</a>
+ <div class="page-shell">
+ <header class="masthead">
+  <a class="wordmark" href="#top" aria-label="Ziyang Wang — Home">ZW<span class="red">.</span></a>
+  <span class="masthead-note" data-i18n="site.index">Personal index / 2026</span>
+  <nav class="desktop-nav" aria-label="Main navigation"><a data-i18n="nav.projects" href="#projects">Work</a><a data-i18n="nav.experience" href="#experience">Experience</a><a data-i18n="nav.publications" href="#publications">Writing</a><a data-i18n="nav.about" href="#about">About</a><a data-i18n="nav.contact" href="#contact">Contact</a></nav>
+  <div class="header-controls"><div class="language-switch" role="group" aria-label="Language"><button type="button" data-lang-switch="zh" aria-pressed="false">中</button><span aria-hidden="true">/</span><button type="button" data-lang-switch="en" aria-pressed="true">EN</button></div><button class="menu-toggle" type="button" aria-controls="mobile-navigation" aria-expanded="false" data-menu-toggle><span data-i18n="site.menu">Index</span> <span aria-hidden="true">+</span></button></div>
+  <nav id="mobile-navigation" class="mobile-nav" aria-label="Mobile navigation" hidden><a data-i18n="nav.projects" href="#projects">Work</a><a data-i18n="nav.experience" href="#experience">Experience</a><a data-i18n="nav.publications" href="#publications">Writing</a><a data-i18n="nav.about" href="#about">About</a><a data-i18n="nav.contact" href="#contact">Contact</a></nav>
+ </header>
+ <main id="main">
+  <section class="hero" aria-labelledby="name">
+   <div class="hero-topline"><p class="eyebrow" data-i18n="site.discipline">Computer science · Research & engineering</p><p class="local-time"><span class="time-dot" aria-hidden="true"></span><span data-live-clock>Boston / —</span></p></div>
+   <div class="hero-grid">
+    <div class="hero-copy"><p class="name-note">王梓洋 <span>/ Williams</span></p><h1 id="name">Ziyang<br><em>Wang.</em></h1><p class="hero-intro" data-i18n="hero.intro">I study how language models learn, and build systems that put them to work.</p><p class="hero-affiliation" data-i18n="hero.affiliation">Computer science master's student at Boston University. Working on inference-time learning, efficient attention, and agent memory.</p><div class="hero-links"><a class="text-link" data-i18n="hero.workLink" href="#projects">Explore selected work</a><span aria-hidden="true">↘</span><a class="quiet-link" data-i18n="hero.contactLink" href="mailto:ziyangw321@gmail.com">Write to me</a><span aria-hidden="true">↗</span></div></div>
+    <aside class="hero-aside"><figure class="portrait"><div class="photo-mat"><img src="6207571c901eb8592de488e44c275c12.jpg" alt="Ziyang Wang at a mountain overlook" data-i18n-alt="hero.photoAlt" width="720" height="960" fetchpriority="high"></div><figcaption><span data-i18n="hero.photoCaption">Ziyang / Williams</span><span class="photo-number">FIG. 01</span></figcaption></figure><div class="portrait-note"><span class="note-mark" aria-hidden="true">↳</span><span data-i18n="hero.photoNote">A moment away from the screen</span></div><p class="availability"><span class="availability-mark" aria-hidden="true">↗</span><span data-i18n="hero.opportunity">Open to 2027 research & engineering opportunities</span></p></aside>
+   </div>
+   <div class="hero-colophon"><span>LLM / LEARNING / SYSTEMS</span><a href="#projects" aria-label="Scroll to selected work">SCROLL TO EXPLORE ↓</a></div>
+  </section>
+  <section id="projects" class="section work-section">
+   <header class="section-heading"><p class="section-index">01 / <span data-i18n="section.projectsEnglish">Selected work</span></p><div><h2 data-i18n="section.projects">Research & practice</h2><p class="section-note" data-i18n="section.projectsNote">From learning mechanisms to working, inspectable systems.</p></div></header>
+   <div class="work-toolbar" id="work-filters" hidden><div class="filter-group" role="group" aria-label="Project categories"><button type="button" class="filter active" data-filter="all" aria-pressed="true"><span data-i18n="filter.all">All work</span></button><button type="button" class="filter" data-filter="research" aria-pressed="false"><span data-i18n="filter.research">Models & learning</span></button><button type="button" class="filter" data-filter="systems" aria-pressed="false"><span data-i18n="filter.systems">Systems & applications</span></button></div><p class="work-count" aria-live="polite"><span data-work-count>06</span> <span data-i18n="work.count">projects</span></p></div>
+   <div class="work-list"><details class="work" data-category="research" id="work-project6">
+    <summary>
+      <span class="work-number">01</span>
+      <span class="work-heading"><h3 data-i18n="projects.project6Short">TTT × PC-ALM</h3><p class="work-deck" data-i18n="projects.project6Deck">What does a pretrained base need for inference-time self-iteration? An investigation into local credit and branch dynamics.</p></span>
+      <span class="work-meta"><span data-i18n="projects.project6Type">Learning mechanisms</span><span class="work-status"><span data-i18n="projects.statusReview">Under Review</span></span></span>
+      <span class="work-toggle" aria-hidden="true">+</span><span class="sr-only" data-expand-label>Expand project details</span>
+    </summary>
+    <div class="work-body">
+      <p class="work-date" data-i18n="projects.project6Date">Independent research · Ongoing</p>
+      <p data-i18n="projects.project6Description">Studying what a pretrained base needs for inference-time self-iteration: six requirements spanning representation, uncertainty, and local credit, with TTT × PC-ALM as a constructive instance.</p>
+      <ul><li data-i18n="projects.project6Detail1">Constructed a mechanism witness in which local multipliers alter cross-branch dynamics, with controlled comparisons against strong regression and matched-parameter optimizers.</li><li data-i18n="projects.project6Detail2">The public snapshot preserves negative results, resource accounting, and a frozen confirmation protocol; an independent average advantage on new tasks remains unconfirmed.</li></ul>
+      <a class="text-link" data-i18n="projects.viewRepo" href="https://github.com/calloftheNIGHT2023/ttt-pc-alm-research" target="_blank" rel="noopener noreferrer">View Repo</a> <span aria-hidden="true">↗</span>
     </div>
-    <div class="hero-glow"></div>
-
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#top" aria-label="Ziyang Wang — Home" class="text-xl font-bold tracking-tighter">ZW.</a>
-            <div class="hidden md:flex items-center space-x-5 text-sm font-medium text-slate-400">
-                <a href="#about" class="hover:text-blue-400 transition" data-i18n="nav.about">About</a>
-                <a href="#education" class="hover:text-blue-400 transition" data-i18n="nav.education">Education</a>
-                <a href="#experience" class="hover:text-blue-400 transition" data-i18n="nav.experience">Experience</a>
-                <a href="#projects" class="hover:text-blue-400 transition" data-i18n="nav.projects">Projects</a>
-                <a href="#publications" class="hover:text-blue-400 transition" data-i18n="nav.publications">Publications</a>
-                <a href="#contact" class="hover:text-blue-400 transition font-semibold text-white" data-i18n="nav.contact">Contact</a>
-                <div class="lang-toggle" aria-label="Language switcher">
-                    <button type="button" data-lang-switch="zh">中文</button>
-                    <button type="button" data-lang-switch="en">EN</button>
-                </div>
-            </div>
-            <div class="md:hidden flex items-center gap-3">
-                <div class="lang-toggle" aria-label="Language switcher">
-                    <button type="button" data-lang-switch="zh">中文</button>
-                    <button type="button" data-lang-switch="en">EN</button>
-                </div>
-                <button type="button" data-menu-toggle aria-label="打开导航 / Open navigation" aria-controls="mobile-navigation" aria-expanded="false"><i data-lucide="menu"></i></button>
-            </div>
-        </div>
-        <div id="mobile-navigation" class="mobile-nav md:hidden" hidden>
-            <a href="#about" data-i18n="nav.about">About</a>
-            <a href="#education" data-i18n="nav.education">Education</a>
-            <a href="#experience" data-i18n="nav.experience">Experience</a>
-            <a href="#projects" data-i18n="nav.projects">Projects</a>
-            <a href="#publications" data-i18n="nav.publications">Publications</a>
-            <a href="#contact" data-i18n="nav.contact">Contact</a>
-        </div>
-    </nav>
-
-    <section class="relative pt-40 pb-20 px-6 max-w-6xl mx-auto">
-        <div class="reveal active">
-            <div class="inline-block px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-medium mb-6" data-i18n="hero.badge">Open to 2027 Research & Engineering Opportunities</div>
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-6">
-                Ziyang <span class="text-gradient">Wang</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-400 max-w-2xl leading-relaxed mb-10" data-i18n="hero.description">CS Graduate Student at <span class="text-white font-semibold">Boston University</span>. Focusing on <span class="italic">NLP, LLMs, and Multi-Agent Systems</span>.</p>
-            <div class="flex flex-wrap gap-3 mb-10">
-                <div class="status-pill">
-                    <span class="status-dot"></span>
-                    <span data-i18n="hero.status">Working on test-time learning and native sparse attention</span>
-                </div>
-                <div class="status-pill">
-                    <i data-lucide="clock-3" class="w-4 h-4 text-blue-400"></i>
-                    <span data-live-clock>Boston time loading...</span>
-                </div>
-            </div>
-            <div class="flex flex-wrap gap-4">
-                <a href="https://github.com/calloftheNIGHT2023?tab=repositories" target="_blank" rel="noopener noreferrer" class="magnetic px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-semibold transition flex items-center gap-2" data-magnetic>
-                    <span data-i18n="hero.viewWork">View My Work</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-                <a href="mailto:ziyangw321@gmail.com" class="magnetic px-8 py-3 glass hover:bg-white/5 rounded-full font-semibold transition" data-i18n="hero.contact" data-magnetic>Contact Me</a>
-            </div>
-            <div class="hero-metrics">
-                <div class="metric-card magnetic" data-magnetic>
-                    <strong data-i18n="hero.metric1Title">Test-Time Learning</strong>
-                    <span data-i18n="hero.metric1Body">Studying local credit assignment and branch exploration under strict evaluation boundaries.</span>
-                </div>
-                <div class="metric-card magnetic" data-magnetic>
-                    <strong data-i18n="hero.metric2Title">Efficient Language Models</strong>
-                    <span data-i18n="hero.metric2Body">Comparing dense, learned-sparse, and local attention in from-scratch pretraining.</span>
-                </div>
-                <div class="metric-card magnetic" data-magnetic>
-                    <strong data-i18n="hero.metric3Title">Agents + Evaluation</strong>
-                    <span data-i18n="hero.metric3Body">Building reproducible multi-agent systems, validators, and dynamic evaluation loops.</span>
-                </div>
-                <div class="metric-card magnetic" data-magnetic>
-                    <strong data-i18n="hero.metric4Title">6.82B</strong>
-                    <span data-i18n="hero.metric4Body">Lifetime Tokens</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="relative group tilt-card" data-tilt-card>
-                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                <div class="relative aspect-square bg-slate-900 rounded-2xl flex items-center justify-center border border-white/10 overflow-hidden">
-                    <img
-                        src="6207571c901eb8592de488e44c275c12.jpg"
-                        alt="Ziyang (Williams) Wang"
-                        loading="lazy"
-                        class="h-full w-full object-cover"
-                    >
-                </div>
-            </div>
-            <div>
-                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                    <i data-lucide="terminal" class="text-blue-500"></i> <span data-i18n="about.title">About Me</span>
-                </h2>
-                <p class="text-slate-400 leading-relaxed mb-6" data-i18n="about.description">I am Ziyang (Williams) Wang, a computer science master's student at Boston University and a graduate of Jilin University. I work on <strong>language-model learning mechanisms, efficient attention, and agent systems</strong>, spanning task design, data construction, training, and reproducible evaluation. My industry experience includes internships at Xiaohongshu's strategic investment AI team and Deal Flow Xchange Inc.AI.</p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="p-4 glass rounded-xl">
-                        <h4 class="text-white font-bold mb-1" data-i18n="about.educationLabel">Education</h4>
-                        <p class="text-xs text-slate-400" data-i18n="about.educationValue">Boston University · M.S. in Computer Science (in progress)<br>Jilin University · B.Eng. in Computer Science and Technology</p>
-                    </div>
-                    <div class="p-4 glass rounded-xl">
-                        <h4 class="text-white font-bold mb-1" data-i18n="about.interestsLabel">Interests</h4>
-                        <p class="text-xs text-slate-400" data-i18n="about.interestsValue">Test-Time Learning, Sparse Attention, Multi-Agent Systems</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-12 text-center" data-i18n="skills.title">Tech Stack</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="p-6 glass rounded-2xl text-center bento-card">
-                <i data-lucide="code-2" class="mx-auto mb-4 text-blue-400"></i>
-                <h3 class="font-bold mb-2" data-i18n="skills.languagesLabel">Languages</h3>
-                <p class="text-xs text-slate-500" data-i18n="skills.languagesValue">Python, Java, C, C++</p>
-            </div>
-            <div class="p-6 glass rounded-2xl text-center bento-card">
-                <i data-lucide="brain-circuit" class="mx-auto mb-4 text-purple-400"></i>
-                <h3 class="font-bold mb-2" data-i18n="skills.aiLabel">AI & Data</h3>
-                <p class="text-xs text-slate-500" data-i18n="skills.aiValue">PyTorch, Hugging Face, OpenRLHF, vLLM</p>
-            </div>
-            <div class="p-6 glass rounded-2xl text-center bento-card">
-                <i data-lucide="layout" class="mx-auto mb-4 text-emerald-400"></i>
-                <h3 class="font-bold mb-2" data-i18n="skills.academicLabel">Models & Training</h3>
-                <p class="text-xs text-slate-500" data-i18n="skills.academicValue">SFT / LoRA, Reward Design, Test-Time Learning</p>
-            </div>
-            <div class="p-6 glass rounded-2xl text-center bento-card">
-                <i data-lucide="git-branch" class="mx-auto mb-4 text-orange-400"></i>
-                <h3 class="font-bold mb-2" data-i18n="skills.toolsLabel">Tools</h3>
-                <p class="text-xs text-slate-500" data-i18n="skills.toolsValue">FastAPI, Next.js, RAG, Tool Calling, Git/GitHub</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-10 flex items-center gap-3"><i data-lucide="graduation-cap" class="text-blue-400"></i><span data-i18n="education.title">Education</span></h2>
-        <div class="grid md:grid-cols-2 gap-6">
-            <article class="glass p-7 rounded-2xl">
-                <p class="project-date" data-i18n="education.msDate">Sep. 2025 — Jan. 2027 (expected)</p>
-                <h3 class="text-xl font-bold mb-2" data-i18n="education.msSchool">Boston University</h3>
-                <p class="text-slate-300" data-i18n="education.msDegree">M.S. in Computer Science · In progress</p>
-            </article>
-            <article class="glass p-7 rounded-2xl">
-                <p class="project-date" data-i18n="education.bsDate">Sep. 2021 — Jun. 2025</p>
-                <h3 class="text-xl font-bold mb-2" data-i18n="education.bsSchool">Jilin University</h3>
-                <p class="text-slate-300" data-i18n="education.bsDegree">B.Eng. in Computer Science and Technology</p>
-            </article>
-        </div>
-    </section>
-
-    <section id="experience" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
-            <i data-lucide="briefcase" class="text-blue-500"></i> <span data-i18n="experience.title">Professional Experience</span>
-        </h2>
-        <div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
-            
-            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                <div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-700 bg-slate-900 text-blue-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-                    <i data-lucide="sparkles" class="w-5 h-5"></i>
-                </div>
-                <div class="w-[calc(100%-4rem)] md:w-[45%] glass p-6 rounded-2xl bento-card">
-                    <div class="flex items-center justify-between mb-2">
-                        <time class="font-mono text-xs text-blue-500">Nov. 2025 - Feb. 2026 </time>
-                    </div>
-                    <h3 class="font-bold text-white text-lg" data-i18n="experience.role1">AI Agent Research Intern</h3>
-                    <p class="text-sm text-slate-400 mb-4">Deal Flow Xchange Inc.AI</p>
-                    <ul class="text-sm text-slate-400 list-disc list-inside space-y-2 leading-relaxed">
-                        <li data-i18n="experience.role1Item1">Designed agent workflows for founder and investor sourcing, translating business needs into demonstrable AI application flows.</li>
-                        <li data-i18n="experience.role1Item2">Iterated on prompt strategies and feedback mechanisms to support implementation and demonstrations.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                <div class="flex items-center justify-center w-10 h-10 rounded-full border border-slate-700 bg-slate-900 text-blue-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-                    <i data-lucide="search" class="w-5 h-5"></i>
-                </div>
-                <div class="w-[calc(100%-4rem)] md:w-[45%] glass p-6 rounded-2xl bento-card">
-                    <div class="flex items-center justify-between mb-2">
-                        <time class="font-mono text-xs text-blue-500">Feb. 2025 - May. 2025 </time>
-                    </div>
-                    <h3 class="font-bold text-white text-lg" data-i18n="experience.role2">AI Research Intern</h3>
-                    <p class="text-sm text-slate-400 mb-4"><span data-i18n="experience.company2">Xiaohongshu (RED) · AI Team, Strategic Investment</span></p>
-                    <ul class="text-sm text-slate-400 list-disc list-inside space-y-2 leading-relaxed">
-                        <li data-i18n="experience.role2Item1">Contributed to large-model agent projects by synthesizing interviews and research findings for technical analysis.</li>
-                        <li data-i18n="experience.role2Item2">Researched AI software and hardware ecosystems and consolidated cross-team technical and market perspectives.</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <div class="flex flex-col gap-3 mb-12 md:flex-row md:items-end md:justify-between">
-            <div>
-                <p class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-3" data-i18n="projects.eyebrow">Current Research & Builds</p>
-                <h2 class="text-3xl font-bold" data-i18n="projects.title">Selected Work</h2>
-            </div>
-            <p class="text-sm text-slate-400 max-w-2xl" data-i18n="projects.subtitle">From model learning mechanisms to working agent applications, connecting training, retrieval, memory, and evaluation.</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-8">
-            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
-                <div class="flex justify-between items-start mb-6 gap-4">
-                    <div class="p-3 bg-rose-500/10 rounded-2xl text-rose-400"><i data-lucide="bot" class="w-8 h-8"></i></div>
-                    <span class="px-3 py-1 bg-rose-500/10 text-rose-400 text-[10px] font-bold rounded-full border border-rose-500/20" data-i18n="projects.statusPrototype">Research Prototype</span>
-                </div>
-                <h3 class="text-xl font-bold mb-3" data-i18n="projects.memTitle">MemVLA · Structured Episodic Memory</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-4" data-i18n="projects.memDescription">Exploring structured memory for long-horizon vision-language-action control: task progress, object changes, action outcomes, and failures.</p>
-                <ul class="detail-list flex-1"><li data-i18n="projects.memDetail1">Implemented rule-based memory writing, JSON persistence, relevance retrieval, a memory-conditioned policy interface, and trajectory and recovery metrics.</li><li data-i18n="projects.memDetail2">The engineering pipeline is validated in a synthetic environment; real LIBERO / OpenVLA integration and benchmark gains remain unverified.</li></ul>
-                <div class="flex flex-wrap gap-2 mb-6"><span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">VLA</span><span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Episodic Memory</span><span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Failure Recovery</span></div>
-                <a href="https://github.com/calloftheNIGHT2023/MemVLA" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-rose-400"><span data-i18n="projects.viewRepo">View Repo</span><i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
-            </article>
-
-            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
-                <div class="flex justify-between items-start mb-6 gap-4">
-                    <div class="p-3 bg-purple-500/10 rounded-2xl text-purple-400">
-                        <i data-lucide="git-branch" class="w-8 h-8"></i>
-                    </div>
-                    <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-purple-500/20" data-i18n="projects.statusReview">Under Review</span>
-                </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition" data-i18n="projects.project6Title">TTT × PC-ALM · Inference-Time Learning</h3>
-                <p class="project-date" data-i18n="projects.project6Date">Independent research · Ongoing</p>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project6Description">Studying what a pretrained base needs for inference-time self-iteration: six requirements spanning representation, uncertainty, and local credit, with TTT × PC-ALM as a constructive instance.</p>
-                <ul class="detail-list"><li data-i18n="projects.project6Detail1">Constructed a mechanism witness in which local multipliers alter cross-branch dynamics, with controlled comparisons against strong regression and matched-parameter optimizers.</li><li data-i18n="projects.project6Detail2">The public snapshot preserves negative results, resource accounting, and a frozen confirmation protocol; an independent average advantage on new tasks remains unconfirmed.</li></ul>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Test-Time Learning</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">PC-ALM</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">ICLR 2027</span>
-                </div>
-                <a href="https://github.com/calloftheNIGHT2023/ttt-pc-alm-research" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
-                    <span data-i18n="projects.viewRepo">View Repo</span>
-                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </a>
-            </article>
-
-            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
-                <div class="flex justify-between items-start mb-6 gap-4">
-                    <div class="p-3 bg-amber-500/10 rounded-2xl text-amber-400">
-                        <i data-lucide="network" class="w-8 h-8"></i>
-                    </div>
-                    <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-amber-500/20" data-i18n="projects.statusOngoing">Ongoing</span>
-                </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-amber-400 transition" data-i18n="projects.project7Title">Native Sparse-Attention Pretraining</h3>
-                <p class="project-date" data-i18n="projects.project7Date">Sep. 2026 — Present · Independent research</p>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project7Description">Built a full-parameter pretraining and evaluation pipeline around a roughly 95M-parameter BabyLM GDN + Attention model, comparing dense attention, learned sparse routing, and fixed local attention.</p>
-                <ul class="detail-list"><li data-i18n="projects.project7Detail1">Corrected routing-score scaling: development PPL fell from 53.69 to 51.78 in a single-seed comparison; completed paired local-attention comparisons across two seeds.</li><li data-i18n="projects.project7Detail2">Audited outputs, losses, and gradients for fast paths and tiled local attention. Some numerical thresholds remain unmet; end-to-end GPU acceleration is unverified.</li></ul>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">BabyLM</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Sparse Attention</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">GDN</span>
-                </div>
-                <a href="https://github.com/calloftheNIGHT2023/native-sparse-prefill" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition">
-                    <span data-i18n="projects.viewRepo">View Repo</span>
-                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </a>
-            </article>
-
-            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
-                <div class="flex justify-between items-start mb-6 gap-4">
-                    <div class="p-3 bg-blue-500/10 rounded-2xl text-blue-400">
-                        <i data-lucide="activity" class="w-8 h-8"></i>
-                    </div>
-                    <span class="px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-blue-500/20" data-i18n="projects.statusResearch">Research Project</span>
-                </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition" data-i18n="projects.project8Title">Dynamic Open Environment Simulator</h3>
-                <p class="project-date" data-i18n="projects.project8Date">Jun. 2026 — Oct. 2026</p>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project8Description">Led event-driven simulation and evaluation for dynamic open environments, recording states, events, and tool calls as replayable trajectories for robustness evaluation and training-data construction.</p>
-                <ul class="detail-list"><li data-i18n="projects.project8Detail1">Injected noise, priority shifts, tool failures, and delays; designed robustness scores and state-transition rewards with deterministic replay.</li><li data-i18n="projects.project8Detail2">Used IFEval validators to check, repair, and filter samples, exporting reward-contract SFT / GRPO data compatible with OpenRLHF.</li></ul>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Dynamic Evaluation</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">OpenRLHF</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">SFT / GRPO</span>
-                </div>
-            </article>
-
-            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
-                <div class="flex justify-between items-start mb-6 gap-4">
-                    <div class="p-3 bg-cyan-500/10 rounded-2xl text-cyan-400">
-                        <i data-lucide="database" class="w-8 h-8"></i>
-                    </div>
-                    <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-cyan-500/20" data-i18n="projects.statusOngoing">Ongoing</span>
-                </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-cyan-400 transition" data-i18n="projects.project9Title">nsDB Multi-Agent Query & Verification</h3>
-                <p class="project-date" data-i18n="projects.project9Date">Jun. 2026 — Present</p>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project9Description">Built a multi-agent query prototype from natural language to IR DAG, nsQL, and execution, combining task decomposition with deterministic execution and verification.</p>
-                <ul class="detail-list"><li data-i18n="projects.project9Detail1">Unified Coordinator orchestration and context passing, with IR schema constraints, error localization, and bounded retries.</li><li data-i18n="projects.project9Detail2">Implemented localized graph repair, intermediate-relation reuse, and case-memory retrieval to reduce repeated planning and computation.</li></ul>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Multi-Agent</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">IR DAG</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400">Verification</span>
-                </div>
-            </article>
-
-            <article class="glass p-8 rounded-3xl bento-card group flex flex-col">
-                <div class="flex justify-between items-start mb-6 gap-4">
-                    <div class="p-3 bg-emerald-500/10 rounded-2xl text-emerald-400">
-                        <i data-lucide="gamepad-2" class="w-8 h-8"></i>
-                    </div>
-                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/20" data-i18n="projects.statusRecent">Recent Build</span>
-                </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-emerald-400 transition" data-i18n="projects.project3Title">GameBuddy Agent</h3>
-                <p class="project-date" data-i18n="projects.project3Date">Sep. 2025 — Jan. 2026 · Maintained</p>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1" data-i18n="projects.project3Description">Built a FastAPI + Next.js game assistant for situation analysis, Q&A, progression, and review advice across demonstration game packs.</p>
-                <ul class="detail-list"><li data-i18n="projects.project3Detail1">Combined rules, local retrieval, optional LLM tool calling, and persistent user memory, retaining sources, tool results, and fallback paths.</li><li data-i18n="projects.project3Detail2">Built Agent Trace, Prompt / Policy versioning, offline evaluation, and human feedback, exporting qualified SFT / preference samples.</li></ul>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project3Tag1">Game Analysis</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project3Tag2">FastAPI + Next.js</span>
-                    <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-400" data-i18n="projects.project3Tag3">Agent Evaluation</span>
-                </div>
-                <a href="https://github.com/calloftheNIGHT2023/gamebuddy-agent" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition">
-                    <span data-i18n="projects.viewRepo">View Repo</span>
-                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </a>
-            </article>
-
-</div>
-    </section>
-
-    <section id="publications" class="py-20 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl font-bold mb-10 flex items-center gap-3"><i data-lucide="book-open" class="text-purple-400"></i><span data-i18n="publications.title">Publications & Manuscripts</span></h2>
-        <div class="space-y-6">
-            <article class="glass p-7 rounded-2xl">
-                <p class="text-xs text-purple-300 mb-3" data-i18n="publications.review">ICLR 2027 · Under review</p>
-                <h3 class="paper-title text-lg font-semibold mb-3" data-i18n="publications.currentTitle">Six Requirements for Inference-Time Self-Iterating Models: Representation, Uncertainty, and Local Credit</h3>
-                <p class="text-sm text-slate-400 leading-relaxed mb-4" data-i18n="publications.currentDescription">Organizes theory and experiments around the capabilities required of a pretrained base, with TTT × PC-ALM as a constructive instance.</p>
-                <a href="https://github.com/calloftheNIGHT2023/ttt-pc-alm-research" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-purple-300" data-i18n="publications.snapshot">Related research code & stage snapshot</a>
-            </article>
-            <article class="glass p-7 rounded-2xl">
-                <p class="text-xs text-emerald-300 mb-3" data-i18n="publications.published">Published · 2024</p>
-                <h3 class="paper-title text-lg font-semibold mb-3">Enhancing Text-to-Image Generation: Integrating CLIP and Diffusion Models for Improved Visual Accuracy and Semantic Consistency</h3>
-                <p class="text-sm text-slate-400 mb-4">Ziyang Wang · DOI: 10.54254/2755-2721/105/2024TJ0053</p>
-                <a href="https://www.ewadirect.com/proceedings/ace/article/view/16849" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-emerald-300" data-i18n="projects.viewPaper">Read Paper</a>
-            </article>
-        </div>
-    </section>
-
-    <section id="contact" class="py-20 px-6 max-w-4xl mx-auto text-center reveal">
-        <h2 class="text-4xl font-extrabold mb-8" data-i18n="contact.title">Let's Connect</h2>
-        <p class="text-slate-400 mb-12" data-i18n="contact.description">I am always open to discussing AI research, 2027 opportunities, or thoughtful collaborations.</p>
-        <div class="flex flex-wrap justify-center gap-6">
-            <a href="mailto:ziyangw321@gmail.com" class="magnetic p-4 glass rounded-2xl hover:bg-white/5 transition group" data-magnetic>
-                <i data-lucide="mail" class="w-6 h-6 mx-auto mb-2 text-blue-500 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-medium" data-i18n="contact.email">Email</span>
-            </a>
-            <a href="https://github.com/calloftheNIGHT2023" target="_blank" rel="noopener noreferrer" class="magnetic p-4 glass rounded-2xl hover:bg-white/5 transition group" data-magnetic>
-                <i data-lucide="github" class="w-6 h-6 mx-auto mb-2 text-slate-100 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-medium">GitHub</span>
-            </a>
-            <a href="https://www.linkedin.com/in/ziyang-wang-322094382/" target="_blank" rel="noopener noreferrer" class="magnetic p-4 glass rounded-2xl hover:bg-white/5 transition group" data-magnetic>
-                <i data-lucide="linkedin" class="w-6 h-6 mx-auto mb-2 text-blue-600 group-hover:scale-110 transition"></i>
-                <span class="text-xs font-medium">LinkedIn</span>
-            </a>
-        </div>
-    </section>
-
-    <footer class="py-10 border-t border-white/5 text-center text-slate-500 text-sm">
-        <p data-i18n="footer.copy">&copy; 2026 Ziyang Wang. Powered by curiosity and AI.</p>
-        <p class="mt-2 italic" data-i18n="footer.quote">"The best way to predict the future is to generate it."</p>
-    </footer>
-
-    <script>
-        const translations = {
-            zh: {
-                "publications.snapshot": "相关研究代码与阶段性快照",
-                "publications.currentDescription": "Six Requirements for Inference-Time Self-Iterating Models: Representation, Uncertainty, and Local Credit。以预训练基座的能力要求组织理论与实验，TTT × PC-ALM 为构造性实例。",
-                "publications.currentTitle": "推理时自迭代模型的六项要求：表征、不确定性与局部信用分配",
-                "publications.published": "已发表 · 2024",
-                "publications.review": "ICLR 2027 · 在审",
-                "publications.title": "论文与研究稿件",
-                "projects.project3Detail2": "构建 Agent Trace、Prompt / Policy 版本管理、离线评测及人工反馈闭环，导出合格 SFT / Preference 样本。",
-                "projects.project3Detail1": "结合规则、本地检索、可选 LLM 工具调用与持久化用户记忆，保留来源、工具结果和降级路径。",
-                "projects.project3Date": "2025.09 — 2026.01 · 持续维护",
-                "projects.project9Detail2": "实现局部图修复、中间关系复用与案例记忆检索，用于减少重复规划和计算。",
-                "projects.project9Detail1": "统一 Coordinator 编排与上下文传递，加入 IR Schema 约束、错误定位和有界重试。",
-                "projects.project9Date": "2026.06 — 至今",
-                "projects.project8Detail2": "结合 IFEval 验证器进行样本校验、修正与过滤，导出含 Reward Contract 的 OpenRLHF 兼容 SFT / GRPO 数据。",
-                "projects.project8Detail1": "注入噪声、优先级突变及工具失败 / 延迟，设计鲁棒性评分与状态转移奖励，支持确定性回放。",
-                "projects.project8Date": "2026.06 — 2026.10",
-                "projects.project7Detail2": "开展快速路径与分块局部注意力的输出、损失和梯度校验；部分数值门槛尚未通过，端到端 GPU 加速尚未验证。",
-                "projects.project7Detail1": "修正路由分数尺度，单种子对照的开发集 PPL 从 53.69 降至 51.78；完成固定局部注意力双种子配对验证。",
-                "projects.project7Date": "2026.09 — 至今 · 独立研究",
-                "projects.project6Detail2": "公开快照保留负结果、资源核算与冻结确认协议；尚未确认新任务分布上的独立平均优势。",
-                "projects.project6Detail1": "构造局部乘子改变跨分支动力学的机制见证，并与强回归、同参数优化器进行受控比较。",
-                "projects.project6Date": "独立研究 · 在研",
-                "projects.memDetail2": "已在合成环境验证工程链路；真实 LIBERO / OpenVLA 接入与基准收益仍待验证。",
-                "projects.memDetail1": "实现规则记忆写入、JSON 持久化、相关性检索及记忆条件化策略接口，并记录轨迹与恢复指标。",
-                "projects.memDescription": "面向长程视觉—语言—动作控制，探索如何用结构化记忆追踪任务进度、物体变化、动作结果与失败信息。",
-                "projects.memTitle": "MemVLA · 结构化情景记忆",
-                "projects.statusPrototype": "研究原型",
-                "experience.company2": "小红书（RED）· 战略投资部 AI 组",
-                "education.bsDegree": "计算机科学与技术 · 工学学士",
-                "education.bsSchool": "吉林大学",
-                "education.bsDate": "2021.09 — 2025.06",
-                "education.msDegree": "计算机科学硕士 · 在读",
-                "education.msSchool": "波士顿大学",
-                "education.msDate": "2025.09 — 2027.01（预计）",
-                "education.title": "教育背景",
-                "nav.publications": "论文",
-                "nav.education": "教育",
-                pageTitle: "Ziyang (Williams) Wang | AI研究者与开发者",
-                metaDescription: "Ziyang Wang - 波士顿大学计算机硕士，专注于 NLP、LLM 和多智能体系统。",
-                "nav.about": "关于我",
-                "nav.experience": "经历",
-                "nav.projects": "项目",
-                "nav.contact": "联系",
-                "hero.badge": "开放 2027 年研究与算法工程机会",
-                "hero.description": "波士顿大学计算机科学硕士在读，研究方向聚焦于 <span class=\"text-white font-semibold\">NLP、LLM 与多智能体系统</span>。",
-                "hero.status": "正在推进测试时学习与原生稀疏注意力研究",
-                "hero.viewWork": "查看作品",
-                "hero.contact": "联系我",
-                "hero.metric1Title": "测试时学习",
-                "hero.metric1Body": "在严格评测边界下研究局部信用分配与分支探索。",
-                "hero.metric2Title": "高效语言模型",
-                "hero.metric2Body": "对比从头预训练中的密集、学习式稀疏与局部注意力。",
-                "hero.metric3Title": "智能体与评测",
-                "hero.metric3Body": "构建可复现的多智能体系统、验证器与动态评测闭环。",
-                "hero.metric4Title": "68.2 亿",
-                "hero.metric4Body": "累计 Token 数",
-                "about.title": "关于我",
-                "about.description": "我是王梓洋（Williams），现就读于波士顿大学计算机科学硕士项目，本科毕业于吉林大学。研究与工程实践围绕<strong>语言模型学习机制、高效注意力与智能体系统</strong>展开，覆盖任务建模、数据构造、模型训练和可复现评测；曾在小红书战略投资部 AI 组与 Deal Flow Xchange Inc.AI 实习。",
-                "about.educationLabel": "教育背景",
-                "about.educationValue": "波士顿大学 · 计算机科学硕士在读<br>吉林大学 · 计算机科学与技术学士",
-                "about.interestsLabel": "研究兴趣",
-                "about.interestsValue": "测试时学习、稀疏注意力、多智能体系统",
-                "skills.title": "技术栈",
-                "skills.languagesLabel": "编程语言",
-                "skills.languagesValue": "Python、Java、C、C++",
-                "skills.aiLabel": "AI 与数据",
-                "skills.aiValue": "PyTorch、Hugging Face、OpenRLHF、vLLM",
-                "skills.academicLabel": "模型与训练",
-                "skills.academicValue": "SFT / LoRA、奖励函数设计、测试时学习",
-                "skills.toolsLabel": "工具",
-                "skills.toolsValue": "FastAPI、Next.js、RAG、Tool Calling、Git/GitHub",
-                "experience.title": "专业经历",
-                "experience.role1": "AI Agent 研究实习生",
-                "experience.role1Item1": "设计面向创始人与投资方挖掘的智能体工作流，将业务需求整理为可演示的 AI 应用流程。",
-                "experience.role1Item2": "迭代提示词策略与反馈机制，支持智能体方案落地及演示。",
-                "experience.role2": "AI 研究实习生",
-                "experience.role2Item1": "参与大模型智能体项目，整理访谈记录与研究结论，支持技术方向分析。",
-                "experience.role2Item2": "调研 AI 软硬件生态，整合跨团队技术观点与市场信息，为项目研究提供依据。",
-                "projects.eyebrow": "当前研究与项目",
-                "projects.title": "精选项目与研究",
-                "projects.subtitle": "从模型学习机制到可运行的智能体应用，关注训练、检索、记忆与评测如何形成闭环。",
-                "projects.statusRecent": "近期项目",
-                "projects.statusAccepted": "已录用",
-                "projects.statusOngoing": "进行中",
-                "projects.statusResearch": "研究项目",
-                "projects.project1Title": "文生图生成准确性研究",
-                "projects.project1Description": "结合 CLIP 与扩散模型，提升生成图像的视觉准确性与语义一致性。已被 NCAW 2024 接收。",
-                "projects.project1Tag1": "扩散模型",
-                "projects.statusReview": "审稿中",
-                "projects.project3Title": "GameBuddy Agent",
-                "projects.project3Description": "基于 FastAPI + Next.js 构建游戏智能助手，面向演示游戏包提供局势分析、问答、养成与复盘建议。",
-                "projects.project3Tag1": "Game Analysis",
-                "projects.project3Tag2": "FastAPI + Next.js",
-                "projects.project3Tag3": "Agent Evaluation",
-                "projects.project6Title": "TTT × PC-ALM · 推理时学习机制",
-                "projects.project6Description": "研究预训练基座如何支持推理时自迭代，围绕表征、不确定性与局部信用分配建立六项要求，并以 TTT × PC-ALM 作为构造性实例。",
-                "projects.project7Title": "原生稀疏注意力预训练",
-                "projects.project7Description": "基于约 95M 参数的 BabyLM GDN + Attention 模型，搭建全参数预训练与评测链路，对比密集注意力、学习式稀疏路由及固定局部注意力。",
-                "projects.project8Title": "Dynamic Open Environment Simulator",
-                "projects.project8Description": "主导事件驱动的动态开放环境仿真与评测，将状态、事件和工具调用记录为可回放轨迹，连接鲁棒性评测与训练数据构造。",
-                "projects.project9Title": "nsDB 多智能体查询与验证",
-                "projects.project9Description": "围绕自然语言 → IR DAG → nsQL → 执行构建多智能体查询原型，将任务分解与确定性执行、结果验证结合。",
-                "projects.viewPaper": "查看原文",
-                "projects.viewRepo": "查看仓库",
-                "contact.title": "联系我",
-                "contact.description": "欢迎交流 AI 研究、2027 年机会或任何有意思的合作项目。",
-                "contact.email": "邮箱",
-                "footer.copy": "&copy; 2026 Ziyang Wang. 由好奇心与 AI 驱动。",
-                "footer.quote": "“预测未来的最好方式，就是亲手创造它。”"
-            },
-            en: {
-                "publications.snapshot": "Related research code & stage snapshot",
-                "publications.currentDescription": "Organizes theory and experiments around the capabilities required of a pretrained base, with TTT × PC-ALM as a constructive instance.",
-                "publications.currentTitle": "Six Requirements for Inference-Time Self-Iterating Models: Representation, Uncertainty, and Local Credit",
-                "publications.published": "Published · 2024",
-                "publications.review": "ICLR 2027 · Under review",
-                "publications.title": "Publications & Manuscripts",
-                "projects.project3Detail2": "Built Agent Trace, Prompt / Policy versioning, offline evaluation, and human feedback, exporting qualified SFT / preference samples.",
-                "projects.project3Detail1": "Combined rules, local retrieval, optional LLM tool calling, and persistent user memory, retaining sources, tool results, and fallback paths.",
-                "projects.project3Date": "Sep. 2025 — Jan. 2026 · Maintained",
-                "projects.project9Detail2": "Implemented localized graph repair, intermediate-relation reuse, and case-memory retrieval to reduce repeated planning and computation.",
-                "projects.project9Detail1": "Unified Coordinator orchestration and context passing, with IR schema constraints, error localization, and bounded retries.",
-                "projects.project9Date": "Jun. 2026 — Present",
-                "projects.project8Detail2": "Used IFEval validators to check, repair, and filter samples, exporting reward-contract SFT / GRPO data compatible with OpenRLHF.",
-                "projects.project8Detail1": "Injected noise, priority shifts, tool failures, and delays; designed robustness scores and state-transition rewards with deterministic replay.",
-                "projects.project8Date": "Jun. 2026 — Oct. 2026",
-                "projects.project7Detail2": "Audited outputs, losses, and gradients for fast paths and tiled local attention. Some numerical thresholds remain unmet; end-to-end GPU acceleration is unverified.",
-                "projects.project7Detail1": "Corrected routing-score scaling: development PPL fell from 53.69 to 51.78 in a single-seed comparison; completed paired local-attention comparisons across two seeds.",
-                "projects.project7Date": "Sep. 2026 — Present · Independent research",
-                "projects.project6Detail2": "The public snapshot preserves negative results, resource accounting, and a frozen confirmation protocol; an independent average advantage on new tasks remains unconfirmed.",
-                "projects.project6Detail1": "Constructed a mechanism witness in which local multipliers alter cross-branch dynamics, with controlled comparisons against strong regression and matched-parameter optimizers.",
-                "projects.project6Date": "Independent research · Ongoing",
-                "projects.memDetail2": "The engineering pipeline is validated in a synthetic environment; real LIBERO / OpenVLA integration and benchmark gains remain unverified.",
-                "projects.memDetail1": "Implemented rule-based memory writing, JSON persistence, relevance retrieval, a memory-conditioned policy interface, and trajectory and recovery metrics.",
-                "projects.memDescription": "Exploring structured memory for long-horizon vision-language-action control: task progress, object changes, action outcomes, and failures.",
-                "projects.memTitle": "MemVLA · Structured Episodic Memory",
-                "projects.statusPrototype": "Research Prototype",
-                "experience.company2": "Xiaohongshu (RED) · AI Team, Strategic Investment",
-                "education.bsDegree": "B.Eng. in Computer Science and Technology",
-                "education.bsSchool": "Jilin University",
-                "education.bsDate": "Sep. 2021 — Jun. 2025",
-                "education.msDegree": "M.S. in Computer Science · In progress",
-                "education.msSchool": "Boston University",
-                "education.msDate": "Sep. 2025 — Jan. 2027 (expected)",
-                "education.title": "Education",
-                "nav.publications": "Publications",
-                "nav.education": "Education",
-
-                pageTitle: "Ziyang (Williams) Wang | AI Researcher & Developer",
-                metaDescription: "Ziyang Wang - CS Graduate Student at Boston University, specializing in NLP, LLMs, and Multi-Agent Systems.",
-                "nav.about": "About",
-                "nav.experience": "Experience",
-                "nav.projects": "Projects",
-                "nav.contact": "Contact",
-                "hero.badge": "Open to 2027 Research & Engineering Opportunities",
-                "hero.description": "CS Graduate Student at <span class=\"text-white font-semibold\">Boston University</span>. Focusing on <span class=\"italic\">NLP, LLMs, and Multi-Agent Systems</span>.",
-                "hero.status": "Working on test-time learning and native sparse attention",
-                "hero.viewWork": "View My Work",
-                "hero.contact": "Contact Me",
-                "hero.metric1Title": "Test-Time Learning",
-                "hero.metric1Body": "Studying local credit assignment and branch exploration under strict evaluation boundaries.",
-                "hero.metric2Title": "Efficient Language Models",
-                "hero.metric2Body": "Comparing dense, learned-sparse, and local attention in from-scratch pretraining.",
-                "hero.metric3Title": "Agents + Evaluation",
-                "hero.metric3Body": "Building reproducible multi-agent systems, validators, and dynamic evaluation loops.",
-                "hero.metric4Title": "6.82B",
-                "hero.metric4Body": "Lifetime Tokens",
-                "about.title": "About Me",
-                "about.description": "I am Ziyang (Williams) Wang, a computer science master's student at Boston University and a graduate of Jilin University. I work on <strong>language-model learning mechanisms, efficient attention, and agent systems</strong>, spanning task design, data construction, training, and reproducible evaluation. My industry experience includes internships at Xiaohongshu's strategic investment AI team and Deal Flow Xchange Inc.AI.",
-                "about.educationLabel": "Education",
-                "about.educationValue": "Boston University · M.S. in Computer Science (in progress)<br>Jilin University · B.Eng. in Computer Science and Technology",
-                "about.interestsLabel": "Interests",
-                "about.interestsValue": "Test-Time Learning, Sparse Attention, Multi-Agent Systems",
-                "skills.title": "Tech Stack",
-                "skills.languagesLabel": "Languages",
-                "skills.languagesValue": "Python, Java, C, C++",
-                "skills.aiLabel": "AI & Data",
-                "skills.aiValue": "PyTorch, Hugging Face, OpenRLHF, vLLM",
-                "skills.academicLabel": "Models & Training",
-                "skills.academicValue": "SFT / LoRA, Reward Design, Test-Time Learning",
-                "skills.toolsLabel": "Tools",
-                "skills.toolsValue": "FastAPI, Next.js, RAG, Tool Calling, Git/GitHub",
-                "experience.title": "Professional Experience",
-                "experience.role1": "AI Agent Research Intern",
-                "experience.role1Item1": "Designed agent workflows for founder and investor sourcing, translating business needs into demonstrable AI application flows.",
-                "experience.role1Item2": "Iterated on prompt strategies and feedback mechanisms to support implementation and demonstrations.",
-                "experience.role2": "AI Research Intern",
-                "experience.role2Item1": "Contributed to large-model agent projects by synthesizing interviews and research findings for technical analysis.",
-                "experience.role2Item2": "Researched AI software and hardware ecosystems and consolidated cross-team technical and market perspectives.",
-                "projects.eyebrow": "Current Research & Builds",
-                "projects.title": "Selected Work",
-                "projects.subtitle": "From model learning mechanisms to working agent applications, connecting training, retrieval, memory, and evaluation.",
-                "projects.statusRecent": "Recent Build",
-                "projects.statusAccepted": "Accepted",
-                "projects.statusOngoing": "Ongoing",
-                "projects.statusResearch": "Research Project",
-                "projects.project1Title": "Text-to-Image Generation Accuracy",
-                "projects.project1Description": "Integrating CLIP and Diffusion Models for improved visual accuracy and semantic consistency. Accepted by NCAW 2024.",
-                "projects.project1Tag1": "Diffusion Models",
-                "projects.statusReview": "Under Review",
-                "projects.project3Title": "GameBuddy Agent",
-                "projects.project3Description": "Built a FastAPI + Next.js game assistant for situation analysis, Q&A, progression, and review advice across demonstration game packs.",
-                "projects.project3Tag1": "Game Analysis",
-                "projects.project3Tag2": "FastAPI + Next.js",
-                "projects.project3Tag3": "Agent Evaluation",
-                "projects.project6Title": "TTT × PC-ALM · Inference-Time Learning",
-                "projects.project6Description": "Studying what a pretrained base needs for inference-time self-iteration: six requirements spanning representation, uncertainty, and local credit, with TTT × PC-ALM as a constructive instance.",
-                "projects.project7Title": "Native Sparse-Attention Pretraining",
-                "projects.project7Description": "Built a full-parameter pretraining and evaluation pipeline around a roughly 95M-parameter BabyLM GDN + Attention model, comparing dense attention, learned sparse routing, and fixed local attention.",
-                "projects.project8Title": "Dynamic Open Environment Simulator",
-                "projects.project8Description": "Led event-driven simulation and evaluation for dynamic open environments, recording states, events, and tool calls as replayable trajectories for robustness evaluation and training-data construction.",
-                "projects.project9Title": "nsDB Multi-Agent Query & Verification",
-                "projects.project9Description": "Built a multi-agent query prototype from natural language to IR DAG, nsQL, and execution, combining task decomposition with deterministic execution and verification.",
-                "projects.viewPaper": "Read Paper",
-                "projects.viewRepo": "View Repo",
-                "contact.title": "Let's Connect",
-                "contact.description": "I am always open to discussing AI research, 2027 opportunities, or thoughtful collaborations.",
-                "contact.email": "Email",
-                "footer.copy": "&copy; 2026 Ziyang Wang. Powered by curiosity and AI.",
-                "footer.quote": "\"The best way to predict the future is to generate it.\""
-            }
-        };
-
-        function applyLanguage(lang) {
-            const selected = translations[lang] ? lang : "zh";
-            const dictionary = translations[selected];
-
-            document.documentElement.lang = selected === "zh" ? "zh-CN" : "en";
-            document.title = dictionary.pageTitle;
-
-            const metaDescription = document.querySelector('meta[name="description"]');
-            if (metaDescription) {
-                metaDescription.setAttribute("content", dictionary.metaDescription);
-            }
-
-            document.querySelectorAll("[data-i18n]").forEach((element) => {
-                const key = element.dataset.i18n;
-                if (dictionary[key]) {
-                    element.innerHTML = dictionary[key];
-                }
-            });
-
-            document.querySelectorAll("[data-lang-switch]").forEach((button) => {
-                button.classList.toggle("active", button.dataset.langSwitch === selected);
-            });
-
-            document.querySelectorAll("[data-lang-switch]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.langSwitch === selected)));
-            try { localStorage.setItem("preferredLanguage", selected); } catch (_) {}
-        }
-
-        function updateLiveClock() {
-            const clock = document.querySelector("[data-live-clock]");
-            if (!clock) return;
-            const isChinese = document.documentElement.lang.startsWith("zh");
-            const formatter = new Intl.DateTimeFormat(isChinese ? "zh-CN" : "en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: false,
-                timeZone: "America/New_York"
-            });
-            clock.textContent = `${isChinese ? "波士顿时间" : "Boston time"} ${formatter.format(new Date())}`;
-        }
-
-        function initTiltCards() {
-            document.querySelectorAll("[data-tilt-card]").forEach((card) => {
-                card.addEventListener("mousemove", (event) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = (event.clientX - rect.left) / rect.width;
-                    const y = (event.clientY - rect.top) / rect.height;
-                    const rotateY = (x - 0.5) * 10;
-                    const rotateX = (0.5 - y) * 10;
-                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-
-                card.addEventListener("mouseleave", () => {
-                    card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
-                });
-            });
-        }
-
-        function updateScrollProgress() {
-            const progressBar = document.querySelector("[data-scroll-progress]");
-            if (!progressBar) return;
-            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-            progressBar.style.width = `${progress}%`;
-        }
-
-        function initCursorGlow() {
-            const glow = document.querySelector("[data-cursor-glow]");
-            if (!glow) return;
-
-            window.addEventListener("pointermove", (event) => {
-                glow.style.left = `${event.clientX}px`;
-                glow.style.top = `${event.clientY}px`;
-            }, { passive: true });
-        }
-
-        function initMagneticElements() {
-            document.querySelectorAll("[data-magnetic]").forEach((element) => {
-                element.addEventListener("mousemove", (event) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = (event.clientX - rect.left - rect.width / 2) / rect.width;
-                    const y = (event.clientY - rect.top - rect.height / 2) / rect.height;
-                    element.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
-                });
-
-                element.addEventListener("mouseleave", () => {
-                    element.style.transform = "translate(0, 0)";
-                });
-            });
-        }
-
-        function initIconDragEffects() {
-            const icons = Array.from(document.querySelectorAll("svg.lucide"));
-            if (!icons.length) return;
-
-            icons.forEach((icon) => icon.classList.add("icon-drift"));
-
-            let dragging = false;
-            let rafId = null;
-            let pointerX = 0;
-            let pointerY = 0;
-
-            const render = () => {
-                rafId = null;
-                icons.forEach((icon, index) => {
-                    const rect = icon.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const offsetX = (pointerX - centerX) * 0.015;
-                    const offsetY = (pointerY - centerY) * 0.015;
-                    const driftX = Math.max(-8, Math.min(8, offsetX + Math.sin(index) * 1.5));
-                    const driftY = Math.max(-8, Math.min(8, offsetY + Math.cos(index) * 1.5));
-                    const rotate = Math.max(-10, Math.min(10, driftX * 0.8));
-                    icon.style.transform = dragging
-                        ? `translate(${driftX}px, ${driftY}px) rotate(${rotate}deg) scale(1.04)`
-                        : "translate(0, 0) rotate(0deg) scale(1)";
-                });
-            };
-
-            const queueRender = () => {
-                if (rafId === null) {
-                    rafId = window.requestAnimationFrame(render);
-                }
-            };
-
-            window.addEventListener("pointerdown", (event) => {
-                dragging = true;
-                pointerX = event.clientX;
-                pointerY = event.clientY;
-                icons.forEach((icon) => icon.classList.add("is-dragging"));
-                queueRender();
-            });
-
-            window.addEventListener("pointermove", (event) => {
-                if (!dragging) return;
-                pointerX = event.clientX;
-                pointerY = event.clientY;
-                queueRender();
-            }, { passive: true });
-
-            const resetIcons = () => {
-                dragging = false;
-                icons.forEach((icon) => {
-                    icon.classList.remove("is-dragging");
-                    icon.style.transform = "translate(0, 0) rotate(0deg) scale(1)";
-                });
-            };
-
-            window.addEventListener("pointerup", resetIcons);
-            window.addEventListener("pointercancel", resetIcons);
-            window.addEventListener("blur", resetIcons);
-        }
-
-        // Initialize Icons
-        if (window.lucide) lucide.createIcons();
-
-        // Scroll Reveal Animation
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        document.querySelectorAll("[data-lang-switch]").forEach((button) => {
-            button.addEventListener("click", () => {
-                applyLanguage(button.dataset.langSwitch);
-                updateLiveClock();
-            });
-        });
-
-        let preferredLanguage = "zh";
-        try { preferredLanguage = localStorage.getItem("preferredLanguage") || "zh"; } catch (_) {}
-        applyLanguage(preferredLanguage);
-        const menuToggle = document.querySelector("[data-menu-toggle]");
-        const mobileNavigation = document.getElementById("mobile-navigation");
-        const closeMenu = () => { mobileNavigation.hidden = true; menuToggle.setAttribute("aria-expanded", "false"); };
-        menuToggle.addEventListener("click", () => {
-            mobileNavigation.hidden = !mobileNavigation.hidden;
-            menuToggle.setAttribute("aria-expanded", String(!mobileNavigation.hidden));
-        });
-        mobileNavigation.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
-        document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
-        updateLiveClock();
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(pointer: fine)").matches) {
-            initTiltCards();
-            initCursorGlow();
-            initMagneticElements();
-            initIconDragEffects();
-        }
-        updateScrollProgress();
-        setInterval(updateLiveClock, 1000);
-        window.addEventListener("scroll", updateScrollProgress, { passive: true });
-    </script>
-</body>
-</html>
+  </details><details class="work" data-category="research" id="work-project7">
+    <summary>
+      <span class="work-number">02</span>
+      <span class="work-heading"><h3 data-i18n="projects.project7Short">Native sparse attention</h3><p class="work-deck" data-i18n="projects.project7Deck">Pretraining a roughly 95M-parameter language model to compare dense, learned-sparse, and fixed local attention.</p></span>
+      <span class="work-meta"><span data-i18n="projects.project7Type">Efficient language models</span><span class="work-status"><span data-i18n="projects.statusOngoing">Ongoing</span></span></span>
+      <span class="work-toggle" aria-hidden="true">+</span><span class="sr-only" data-expand-label>Expand project details</span>
+    </summary>
+    <div class="work-body">
+      <p class="work-date" data-i18n="projects.project7Date">Sep. 2026 — Present · Independent research</p>
+      <p data-i18n="projects.project7Description">Built a full-parameter pretraining and evaluation pipeline around a roughly 95M-parameter BabyLM GDN + Attention model, comparing dense attention, learned sparse routing, and fixed local attention.</p>
+      <ul><li data-i18n="projects.project7Detail1">Corrected routing-score scaling: development PPL fell from 53.69 to 51.78 in a single-seed comparison; completed paired local-attention comparisons across two seeds.</li><li data-i18n="projects.project7Detail2">Audited outputs, losses, and gradients for fast paths and tiled local attention. Some numerical thresholds remain unmet; end-to-end GPU acceleration is unverified.</li></ul>
+      <a class="text-link" data-i18n="projects.viewRepo" href="https://github.com/calloftheNIGHT2023/native-sparse-prefill" target="_blank" rel="noopener noreferrer">View Repo</a> <span aria-hidden="true">↗</span>
+    </div>
+  </details><details class="work" data-category="research" id="work-mem">
+    <summary>
+      <span class="work-number">03</span>
+      <span class="work-heading"><h3 data-i18n="projects.memShort">MemVLA</h3><p class="work-deck" data-i18n="projects.memDeck">Structured episodic memory for long-horizon vision-language-action control: progress, state, and failure.</p></span>
+      <span class="work-meta"><span data-i18n="projects.memType">Embodied AI · Memory</span><span class="work-status"><span data-i18n="projects.statusPrototype">Research Prototype</span></span></span>
+      <span class="work-toggle" aria-hidden="true">+</span><span class="sr-only" data-expand-label>Expand project details</span>
+    </summary>
+    <div class="work-body">
+      <p class="work-date" data-i18n="projects.memDate">Ongoing · Research prototype</p>
+      <p data-i18n="projects.memDescription">Exploring structured memory for long-horizon vision-language-action control: task progress, object changes, action outcomes, and failures.</p>
+      <ul><li data-i18n="projects.memDetail1">Implemented rule-based memory writing, JSON persistence, relevance retrieval, a memory-conditioned policy interface, and trajectory and recovery metrics.</li><li data-i18n="projects.memDetail2">The engineering pipeline is validated in a synthetic environment; real LIBERO / OpenVLA integration and benchmark gains remain unverified.</li></ul>
+      <a class="text-link" data-i18n="projects.viewRepo" href="https://github.com/calloftheNIGHT2023/MemVLA" target="_blank" rel="noopener noreferrer">View Repo</a> <span aria-hidden="true">↗</span>
+    </div>
+  </details><details class="work" data-category="systems" id="work-project8">
+    <summary>
+      <span class="work-number">04</span>
+      <span class="work-heading"><h3 data-i18n="projects.project8Short">Dynamic Open Environment</h3><p class="work-deck" data-i18n="projects.project8Deck">Connecting environment perturbations, trajectory replay, robustness evaluation, and training-data construction.</p></span>
+      <span class="work-meta"><span data-i18n="projects.project8Type">Evaluation infrastructure</span><span class="work-status"><span data-i18n="projects.statusResearch">Research Project</span></span></span>
+      <span class="work-toggle" aria-hidden="true">+</span><span class="sr-only" data-expand-label>Expand project details</span>
+    </summary>
+    <div class="work-body">
+      <p class="work-date" data-i18n="projects.project8Date">Jun. 2026 — Oct. 2026</p>
+      <p data-i18n="projects.project8Description">Led event-driven simulation and evaluation for dynamic open environments, recording states, events, and tool calls as replayable trajectories for robustness evaluation and training-data construction.</p>
+      <ul><li data-i18n="projects.project8Detail1">Injected noise, priority shifts, tool failures, and delays; designed robustness scores and state-transition rewards with deterministic replay.</li><li data-i18n="projects.project8Detail2">Used IFEval validators to check, repair, and filter samples, exporting reward-contract SFT / GRPO data compatible with OpenRLHF.</li></ul>
+      
+    </div>
+  </details><details class="work" data-category="systems" id="work-project9">
+    <summary>
+      <span class="work-number">05</span>
+      <span class="work-heading"><h3 data-i18n="projects.project9Short">nsDB</h3><p class="work-deck" data-i18n="projects.project9Deck">Natural-language queries through multi-agent planning, deterministic execution, and result verification.</p></span>
+      <span class="work-meta"><span data-i18n="projects.project9Type">Neural-symbolic systems</span><span class="work-status"><span data-i18n="projects.statusOngoing">Ongoing</span></span></span>
+      <span class="work-toggle" aria-hidden="true">+</span><span class="sr-only" data-expand-label>Expand project details</span>
+    </summary>
+    <div class="work-body">
+      <p class="work-date" data-i18n="projects.project9Date">Jun. 2026 — Present</p>
+      <p data-i18n="projects.project9Description">Built a multi-agent query prototype from natural language to IR DAG, nsQL, and execution, combining task decomposition with deterministic execution and verification.</p>
+      <ul><li data-i18n="projects.project9Detail1">Unified Coordinator orchestration and context passing, with IR schema constraints, error localization, and bounded retries.</li><li data-i18n="projects.project9Detail2">Implemented localized graph repair, intermediate-relation reuse, and case-memory retrieval to reduce repeated planning and computation.</li></ul>
+      
+    </div>
+  </details><details class="work" data-category="systems" id="work-project3">
+    <summary>
+      <span class="work-number">06</span>
+      <span class="work-heading"><h3 data-i18n="projects.project3Short">GameBuddy</h3><p class="work-deck" data-i18n="projects.project3Deck">A game assistant combining local retrieval, tool use, and persistent user memory.</p></span>
+      <span class="work-meta"><span data-i18n="projects.project3Type">Agent applications</span><span class="work-status"><span data-i18n="projects.statusRecent">Recent Build</span></span></span>
+      <span class="work-toggle" aria-hidden="true">+</span><span class="sr-only" data-expand-label>Expand project details</span>
+    </summary>
+    <div class="work-body">
+      <p class="work-date" data-i18n="projects.project3Date">Sep. 2025 — Jan. 2026 · Maintained</p>
+      <p data-i18n="projects.project3Description">Built a FastAPI + Next.js game assistant for situation analysis, Q&A, progression, and review advice across demonstration game packs.</p>
+      <ul><li data-i18n="projects.project3Detail1">Combined rules, local retrieval, optional LLM tool calling, and persistent user memory, retaining sources, tool results, and fallback paths.</li><li data-i18n="projects.project3Detail2">Built Agent Trace, Prompt / Policy versioning, offline evaluation, and human feedback, exporting qualified SFT / preference samples.</li></ul>
+      <a class="text-link" data-i18n="projects.viewRepo" href="https://github.com/calloftheNIGHT2023/gamebuddy-agent" target="_blank" rel="noopener noreferrer">View Repo</a> <span aria-hidden="true">↗</span>
+    </div>
+  </details></div>
+  </section>
+  <section id="experience" class="section">
+   <header class="section-heading"><p class="section-index">02 / <span data-i18n="section.experienceEnglish">Along the way</span></p><div><h2 data-i18n="section.experience">Experience</h2><p class="section-note" data-i18n="section.experienceNote">Understanding problems in industry; exploring answers through research and engineering.</p></div></header>
+   <div class="timeline">
+    <article class="timeline-entry"><p class="timeline-date" data-i18n="experience.date1">Nov. 2025 — Feb. 2026</p><div><h3>Deal Flow Xchange Inc.AI</h3><p class="role" data-i18n="experience.role1">AI Agent Research Intern</p></div><ul><li data-i18n="experience.role1Item1">Designed agent workflows for founder and investor sourcing, translating business needs into demonstrable AI application flows.</li><li data-i18n="experience.role1Item2">Iterated on prompt strategies and feedback mechanisms to support implementation and demonstrations.</li></ul></article>
+    <article class="timeline-entry"><p class="timeline-date" data-i18n="experience.date2">Feb. 2025 — May 2025</p><div><h3>RED / 小红书</h3><p class="role" data-i18n="experience.role2">AI Research Intern</p><p class="department" data-i18n="experience.company2">Xiaohongshu (RED) · AI Team, Strategic Investment</p></div><ul><li data-i18n="experience.role2Item1">Contributed to large-model agent projects by synthesizing interviews and research findings for technical analysis.</li><li data-i18n="experience.role2Item2">Researched AI software and hardware ecosystems and consolidated cross-team technical and market perspectives.</li></ul></article>
+   </div>
+   <div id="education" class="education-block"><h3 class="small-label"><span data-i18n="section.education">Education</span></h3><div class="education-list"><article><h4 data-i18n="education.msSchool">Boston University</h4><p data-i18n="education.msDegree">M.S. in Computer Science · In progress</p><p class="education-date" data-i18n="education.msDate">Sep. 2025 — Jan. 2027 (expected)</p></article><article><h4 data-i18n="education.bsSchool">Jilin University</h4><p data-i18n="education.bsDegree">B.Eng. in Computer Science and Technology</p><p class="education-date" data-i18n="education.bsDate">Sep. 2021 — Jun. 2025</p></article></div></div>
+  </section>
+  <section id="publications" class="section">
+   <header class="section-heading"><p class="section-index">03 / <span data-i18n="section.publicationsEnglish">In writing</span></p><div><h2 data-i18n="section.publications">Papers & manuscripts</h2><p class="section-note" data-i18n="section.publicationsNote">Published research and a current manuscript.</p></div></header>
+   <ol class="publications">
+    <li><span class="publication-number">[01]</span><article><p class="publication-status" data-i18n="publications.review">ICLR 2027 · Under review</p><h3 data-i18n="publications.currentTitle">Six Requirements for Inference-Time Self-Iterating Models: Representation, Uncertainty, and Local Credit</h3><p class="publication-description" data-i18n="publications.currentDescription">Organizes theory and experiments around the capabilities required of a pretrained base, with TTT × PC-ALM as a constructive instance.</p><a class="text-link" data-i18n="publications.snapshot" href="https://github.com/calloftheNIGHT2023/ttt-pc-alm-research" target="_blank" rel="noopener noreferrer">Related research code & stage snapshot</a> <span aria-hidden="true">↗</span></article></li>
+    <li><span class="publication-number">[02]</span><article><p class="publication-status" data-i18n="publications.published">Published · 2024</p><h3>Enhancing Text-to-Image Generation: Integrating CLIP and Diffusion Models for Improved Visual Accuracy and Semantic Consistency</h3><p class="publication-description">Ziyang Wang · DOI: 10.54254/2755-2721/105/2024TJ0053</p><a class="text-link" data-i18n="projects.viewPaper" href="https://www.ewadirect.com/proceedings/ace/article/view/16849" target="_blank" rel="noopener noreferrer">Read Paper</a> <span aria-hidden="true">↗</span></article></li>
+   </ol>
+  </section>
+  <section id="about" class="section about-section">
+   <p class="section-index">04 / <span data-i18n="section.aboutEnglish">A little context</span></p>
+   <div class="about-grid"><div><p class="small-label" data-i18n="section.about">About</p><h2 class="about-statement" data-i18n="about.statement">Between models<br> and systems.</h2></div><div class="about-prose"><p data-i18n="about.body">I'm Ziyang Wang, also known as Williams. I'm pursuing a master's in computer science at Boston University, after a bachelor's at Jilin University. I care about the mechanisms by which models learn, and how retrieval, memory, and tool use come together in a reliable application.</p><p data-i18n="about.body2">My work spans language-model pretraining, inference-time adaptation, dynamic evaluation, and multi-agent systems. I document the problem, implementation, experiments, and evidence together so the work can be understood and checked.</p><p class="token-note"><span data-i18n="about.tokens">Lifetime tokens used</span> <span aria-hidden="true">/</span> <strong data-i18n="about.tokensNote">6.82 billion</strong></p></div></div>
+   <div class="tools-grid"><div><h3 data-i18n="about.languages">Programming</h3><p>Python / Java / C / C++</p></div><div><h3 data-i18n="about.models">Models & training</h3><p>PyTorch / Hugging Face / OpenRLHF / vLLM<br>SFT / LoRA / Reward Design</p></div><div><h3 data-i18n="about.systems">Applications & systems</h3><p>FastAPI / Next.js / RAG<br>Tool Calling / Git</p></div></div>
+  </section>
+ </main>
+ </div>
+ <footer id="contact" class="contact">
+  <div class="contact-inner"><p class="section-index">05 / <span data-i18n="nav.contact">Contact</span></p><div class="contact-grid"><h2 data-i18n="contact.heading">A conversation<br>is a good start.</h2><div class="contact-copy"><p data-i18n="contact.note">For research, 2027 opportunities, or a problem worth building something for. I'd like to hear from you.</p><a class="email-link" href="mailto:ziyangw321@gmail.com">ziyangw321@gmail.com <span aria-hidden="true">↗</span></a><div class="social-links"><a href="https://github.com/calloftheNIGHT2023" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/ziyang-wang-322094382/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></div><div class="footer-bottom"><p>© 2026 Ziyang Wang</p><p data-i18n="footer.note">Research, making, and learning along the way.</p><a data-i18n="footer.back" href="#top">Back to top ↑</a></div></div>
+ </footer>
+ <script id="site-content" type="application/json">{"zh": {"publications.snapshot": "相关研究代码与阶段性快照", "publications.currentDescription": "Six Requirements for Inference-Time Self-Iterating Models: Representation, Uncertainty, and Local Credit。以预训练基座的能力要求组织理论与实验，TTT × PC-ALM 为构造性实例。", "publications.currentTitle": "推理时自迭代模型的六项要求：表征、不确定性与局部信用分配", "publications.published": "已发表 · 2024", "publications.review": "ICLR 2027 · 在审", "projects.project3Detail2": "构建 Agent Trace、Prompt / Policy 版本管理、离线评测及人工反馈闭环，导出合格 SFT / Preference 样本。", "projects.project3Detail1": "结合规则、本地检索、可选 LLM 工具调用与持久化用户记忆，保留来源、工具结果和降级路径。", "projects.project3Date": "2025.09 — 2026.01 · 持续维护", "projects.project9Detail2": "实现局部图修复、中间关系复用与案例记忆检索，用于减少重复规划和计算。", "projects.project9Detail1": "统一 Coordinator 编排与上下文传递，加入 IR Schema 约束、错误定位和有界重试。", "projects.project9Date": "2026.06 — 至今", "projects.project8Detail2": "结合 IFEval 验证器进行样本校验、修正与过滤，导出含 Reward Contract 的 OpenRLHF 兼容 SFT / GRPO 数据。", "projects.project8Detail1": "注入噪声、优先级突变及工具失败 / 延迟，设计鲁棒性评分与状态转移奖励，支持确定性回放。", "projects.project8Date": "2026.06 — 2026.10", "projects.project7Detail2": "开展快速路径与分块局部注意力的输出、损失和梯度校验；部分数值门槛尚未通过，端到端 GPU 加速尚未验证。", "projects.project7Detail1": "修正路由分数尺度，单种子对照的开发集 PPL 从 53.69 降至 51.78；完成固定局部注意力双种子配对验证。", "projects.project7Date": "2026.09 — 至今 · 独立研究", "projects.project6Detail2": "公开快照保留负结果、资源核算与冻结确认协议；尚未确认新任务分布上的独立平均优势。", "projects.project6Detail1": "构造局部乘子改变跨分支动力学的机制见证，并与强回归、同参数优化器进行受控比较。", "projects.project6Date": "独立研究 · 在研", "projects.memDetail2": "已在合成环境验证工程链路；真实 LIBERO / OpenVLA 接入与基准收益仍待验证。", "projects.memDetail1": "实现规则记忆写入、JSON 持久化、相关性检索及记忆条件化策略接口，并记录轨迹与恢复指标。", "projects.memDescription": "面向长程视觉—语言—动作控制，探索如何用结构化记忆追踪任务进度、物体变化、动作结果与失败信息。", "projects.statusPrototype": "研究原型", "experience.company2": "小红书（RED）· 战略投资部 AI 组", "education.bsDegree": "计算机科学与技术 · 工学学士", "education.bsSchool": "吉林大学", "education.bsDate": "2021.09 — 2025.06", "education.msDegree": "计算机科学硕士 · 在读", "education.msSchool": "波士顿大学", "education.msDate": "2025.09 — 2027.01（预计）", "nav.publications": "论文", "pageTitle": "Ziyang (Williams) Wang | AI研究者与开发者", "metaDescription": "Ziyang Wang - 波士顿大学计算机硕士，专注于 NLP、LLM 和多智能体系统。", "nav.about": "关于", "nav.experience": "经历", "nav.projects": "研究与项目", "nav.contact": "联系", "experience.role1": "AI Agent 研究实习生", "experience.role1Item1": "设计面向创始人与投资方挖掘的智能体工作流，将业务需求整理为可演示的 AI 应用流程。", "experience.role1Item2": "迭代提示词策略与反馈机制，支持智能体方案落地及演示。", "experience.role2": "AI 研究实习生", "experience.role2Item1": "参与大模型智能体项目，整理访谈记录与研究结论，支持技术方向分析。", "experience.role2Item2": "调研 AI 软硬件生态，整合跨团队技术观点与市场信息，为项目研究提供依据。", "projects.statusRecent": "近期项目", "projects.statusOngoing": "进行中", "projects.statusResearch": "研究项目", "projects.statusReview": "审稿中", "projects.project3Description": "基于 FastAPI + Next.js 构建游戏智能助手，面向演示游戏包提供局势分析、问答、养成与复盘建议。", "projects.project6Description": "研究预训练基座如何支持推理时自迭代，围绕表征、不确定性与局部信用分配建立六项要求，并以 TTT × PC-ALM 作为构造性实例。", "projects.project7Description": "基于约 95M 参数的 BabyLM GDN + Attention 模型，搭建全参数预训练与评测链路，对比密集注意力、学习式稀疏路由及固定局部注意力。", "projects.project8Description": "主导事件驱动的动态开放环境仿真与评测，将状态、事件和工具调用记录为可回放轨迹，连接鲁棒性评测与训练数据构造。", "projects.project9Description": "围绕自然语言 → IR DAG → nsQL → 执行构建多智能体查询原型，将任务分解与确定性执行、结果验证结合。", "projects.viewPaper": "查看原文", "projects.viewRepo": "查看仓库", "site.index": "个人档案 / 2026", "site.discipline": "计算机科学 · 研究与工程", "site.skip": "跳至正文", "site.menu": "目录", "hero.intro": "我研究语言模型如何学习，也构建让它们在真实任务中工作的系统。", "hero.affiliation": "波士顿大学计算机科学硕士在读。关注推理时学习、高效注意力与智能体记忆。", "hero.workLink": "浏览研究与项目", "hero.contactLink": "写信给我", "hero.opportunity": "开放 2027 年研究与工程机会", "hero.photoCaption": "王梓洋 / Williams", "hero.photoNote": "屏幕之外的一刻", "hero.photoAlt": "王梓洋在山间观景台的照片", "section.projects": "研究与实践", "section.projectsEnglish": "Selected work", "section.projectsNote": "从学习机制出发，走向可运行、可检查的系统。", "filter.all": "全部", "filter.research": "模型与学习", "filter.systems": "系统与应用", "work.more": "展开项目详情", "work.less": "收起项目详情", "work.count": "项工作", "section.experience": "经历", "section.experienceEnglish": "Along the way", "section.experienceNote": "在行业场景中理解问题，在研究与工程中寻找答案。", "experience.date1": "2025.11 — 2026.02", "experience.date2": "2025.02 — 2025.05", "section.education": "教育", "section.publications": "论文与稿件", "section.publicationsEnglish": "In writing", "section.publicationsNote": "已发表研究与当前稿件。", "section.about": "关于我", "section.aboutEnglish": "A little context", "about.statement": "在模型与系统之间。", "about.body": "我是王梓洋，也可以叫我 Williams。现就读于波士顿大学计算机科学硕士项目，本科毕业于吉林大学。我关心模型内部的学习机制，也关心一次检索、一段记忆和一个工具调用如何组成可靠的应用。", "about.body2": "目前的工作覆盖语言模型预训练、推理时适应、动态环境评测与多智能体系统。我习惯把问题定义、实现、实验和证据一起整理，让工作能够被理解和复核。", "about.languages": "编程", "about.models": "模型与训练", "about.systems": "应用与系统", "about.tokens": "累计使用 Token", "about.tokensNote": "68.2 亿", "contact.heading": "从一次交流开始。", "contact.note": "欢迎交流研究、2027 年工作机会，或一个值得动手的问题。", "footer.back": "回到顶部 ↑", "footer.note": "研究、制作，以及持续学习。", "projects.project6Short": "TTT × PC-ALM", "projects.project6Deck": "推理时自迭代需要什么样的预训练基座？从局部信用分配与分支动力学切入。", "projects.project7Short": "原生稀疏注意力", "projects.project7Deck": "从头预训练约 95M 参数语言模型，比较密集、学习式稀疏与固定局部注意力。", "projects.memShort": "MemVLA", "projects.memDeck": "为长程视觉—语言—动作控制构建结构化情景记忆，记录进度、状态与失败。", "projects.project8Short": "Dynamic Open Environment", "projects.project8Deck": "将环境扰动、轨迹回放、鲁棒性评测和训练数据构造连接起来。", "projects.project9Short": "nsDB", "projects.project9Deck": "让自然语言查询经过多智能体规划、确定性执行与结果验证。", "projects.project3Short": "GameBuddy", "projects.project3Deck": "结合本地检索、工具调用与用户记忆的游戏智能助手。", "projects.memDate": "在研 · 研究原型", "projects.project6Type": "学习机制", "projects.project7Type": "高效语言模型", "projects.memType": "具身智能 · 记忆", "projects.project8Type": "评测基础设施", "projects.project9Type": "神经符号系统", "projects.project3Type": "智能体应用"}, "en": {"publications.snapshot": "Related research code & stage snapshot", "publications.currentDescription": "Organizes theory and experiments around the capabilities required of a pretrained base, with TTT × PC-ALM as a constructive instance.", "publications.currentTitle": "Six Requirements for Inference-Time Self-Iterating Models: Representation, Uncertainty, and Local Credit", "publications.published": "Published · 2024", "publications.review": "ICLR 2027 · Under review", "projects.project3Detail2": "Built Agent Trace, Prompt / Policy versioning, offline evaluation, and human feedback, exporting qualified SFT / preference samples.", "projects.project3Detail1": "Combined rules, local retrieval, optional LLM tool calling, and persistent user memory, retaining sources, tool results, and fallback paths.", "projects.project3Date": "Sep. 2025 — Jan. 2026 · Maintained", "projects.project9Detail2": "Implemented localized graph repair, intermediate-relation reuse, and case-memory retrieval to reduce repeated planning and computation.", "projects.project9Detail1": "Unified Coordinator orchestration and context passing, with IR schema constraints, error localization, and bounded retries.", "projects.project9Date": "Jun. 2026 — Present", "projects.project8Detail2": "Used IFEval validators to check, repair, and filter samples, exporting reward-contract SFT / GRPO data compatible with OpenRLHF.", "projects.project8Detail1": "Injected noise, priority shifts, tool failures, and delays; designed robustness scores and state-transition rewards with deterministic replay.", "projects.project8Date": "Jun. 2026 — Oct. 2026", "projects.project7Detail2": "Audited outputs, losses, and gradients for fast paths and tiled local attention. Some numerical thresholds remain unmet; end-to-end GPU acceleration is unverified.", "projects.project7Detail1": "Corrected routing-score scaling: development PPL fell from 53.69 to 51.78 in a single-seed comparison; completed paired local-attention comparisons across two seeds.", "projects.project7Date": "Sep. 2026 — Present · Independent research", "projects.project6Detail2": "The public snapshot preserves negative results, resource accounting, and a frozen confirmation protocol; an independent average advantage on new tasks remains unconfirmed.", "projects.project6Detail1": "Constructed a mechanism witness in which local multipliers alter cross-branch dynamics, with controlled comparisons against strong regression and matched-parameter optimizers.", "projects.project6Date": "Independent research · Ongoing", "projects.memDetail2": "The engineering pipeline is validated in a synthetic environment; real LIBERO / OpenVLA integration and benchmark gains remain unverified.", "projects.memDetail1": "Implemented rule-based memory writing, JSON persistence, relevance retrieval, a memory-conditioned policy interface, and trajectory and recovery metrics.", "projects.memDescription": "Exploring structured memory for long-horizon vision-language-action control: task progress, object changes, action outcomes, and failures.", "projects.statusPrototype": "Research Prototype", "experience.company2": "Xiaohongshu (RED) · AI Team, Strategic Investment", "education.bsDegree": "B.Eng. in Computer Science and Technology", "education.bsSchool": "Jilin University", "education.bsDate": "Sep. 2021 — Jun. 2025", "education.msDegree": "M.S. in Computer Science · In progress", "education.msSchool": "Boston University", "education.msDate": "Sep. 2025 — Jan. 2027 (expected)", "nav.publications": "Writing", "pageTitle": "Ziyang (Williams) Wang | AI Researcher & Developer", "metaDescription": "Ziyang Wang - CS Graduate Student at Boston University, specializing in NLP, LLMs, and Multi-Agent Systems.", "nav.about": "About", "nav.experience": "Experience", "nav.projects": "Work", "nav.contact": "Contact", "experience.role1": "AI Agent Research Intern", "experience.role1Item1": "Designed agent workflows for founder and investor sourcing, translating business needs into demonstrable AI application flows.", "experience.role1Item2": "Iterated on prompt strategies and feedback mechanisms to support implementation and demonstrations.", "experience.role2": "AI Research Intern", "experience.role2Item1": "Contributed to large-model agent projects by synthesizing interviews and research findings for technical analysis.", "experience.role2Item2": "Researched AI software and hardware ecosystems and consolidated cross-team technical and market perspectives.", "projects.statusRecent": "Recent Build", "projects.statusOngoing": "Ongoing", "projects.statusResearch": "Research Project", "projects.statusReview": "Under Review", "projects.project3Description": "Built a FastAPI + Next.js game assistant for situation analysis, Q&A, progression, and review advice across demonstration game packs.", "projects.project6Description": "Studying what a pretrained base needs for inference-time self-iteration: six requirements spanning representation, uncertainty, and local credit, with TTT × PC-ALM as a constructive instance.", "projects.project7Description": "Built a full-parameter pretraining and evaluation pipeline around a roughly 95M-parameter BabyLM GDN + Attention model, comparing dense attention, learned sparse routing, and fixed local attention.", "projects.project8Description": "Led event-driven simulation and evaluation for dynamic open environments, recording states, events, and tool calls as replayable trajectories for robustness evaluation and training-data construction.", "projects.project9Description": "Built a multi-agent query prototype from natural language to IR DAG, nsQL, and execution, combining task decomposition with deterministic execution and verification.", "projects.viewPaper": "Read Paper", "projects.viewRepo": "View Repo", "site.index": "Personal index / 2026", "site.discipline": "Computer science · Research & engineering", "site.skip": "Skip to content", "site.menu": "Index", "hero.intro": "I study how language models learn, and build systems that put them to work.", "hero.affiliation": "Computer science master's student at Boston University. Working on inference-time learning, efficient attention, and agent memory.", "hero.workLink": "Explore selected work", "hero.contactLink": "Write to me", "hero.opportunity": "Open to 2027 research & engineering opportunities", "hero.photoCaption": "Ziyang / Williams", "hero.photoNote": "A moment away from the screen", "hero.photoAlt": "Ziyang Wang at a mountain overlook", "section.projects": "Research & practice", "section.projectsEnglish": "Selected work", "section.projectsNote": "From learning mechanisms to working, inspectable systems.", "filter.all": "All work", "filter.research": "Models & learning", "filter.systems": "Systems & applications", "work.more": "Expand project details", "work.less": "Collapse project details", "work.count": "projects", "section.experience": "Experience", "section.experienceEnglish": "Along the way", "section.experienceNote": "Understanding problems in industry; exploring answers through research and engineering.", "experience.date1": "Nov. 2025 — Feb. 2026", "experience.date2": "Feb. 2025 — May 2025", "section.education": "Education", "section.publications": "Papers & manuscripts", "section.publicationsEnglish": "In writing", "section.publicationsNote": "Published research and a current manuscript.", "section.about": "About", "section.aboutEnglish": "A little context", "about.statement": "Between models<br> and systems.", "about.body": "I'm Ziyang Wang, also known as Williams. I'm pursuing a master's in computer science at Boston University, after a bachelor's at Jilin University. I care about the mechanisms by which models learn, and how retrieval, memory, and tool use come together in a reliable application.", "about.body2": "My work spans language-model pretraining, inference-time adaptation, dynamic evaluation, and multi-agent systems. I document the problem, implementation, experiments, and evidence together so the work can be understood and checked.", "about.languages": "Programming", "about.models": "Models & training", "about.systems": "Applications & systems", "about.tokens": "Lifetime tokens used", "about.tokensNote": "6.82 billion", "contact.heading": "A conversation<br>is a good start.", "contact.note": "For research, 2027 opportunities, or a problem worth building something for. I'd like to hear from you.", "footer.back": "Back to top ↑", "footer.note": "Research, making, and learning along the way.", "projects.project6Short": "TTT × PC-ALM", "projects.project6Deck": "What does a pretrained base need for inference-time self-iteration? An investigation into local credit and branch dynamics.", "projects.project7Short": "Native sparse attention", "projects.project7Deck": "Pretraining a roughly 95M-parameter language model to compare dense, learned-sparse, and fixed local attention.", "projects.memShort": "MemVLA", "projects.memDeck": "Structured episodic memory for long-horizon vision-language-action control: progress, state, and failure.", "projects.project8Short": "Dynamic Open Environment", "projects.project8Deck": "Connecting environment perturbations, trajectory replay, robustness evaluation, and training-data construction.", "projects.project9Short": "nsDB", "projects.project9Deck": "Natural-language queries through multi-agent planning, deterministic execution, and result verification.", "projects.project3Short": "GameBuddy", "projects.project3Deck": "A game assistant combining local retrieval, tool use, and persistent user memory.", "projects.memDate": "Ongoing · Research prototype", "projects.project6Type": "Learning mechanisms", "projects.project7Type": "Efficient language models", "projects.memType": "Embodied AI · Memory", "projects.project8Type": "Evaluation infrastructure", "projects.project9Type": "Neural-symbolic systems", "projects.project3Type": "Agent applications"}}</script>
+</body></html>
